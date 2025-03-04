@@ -9,23 +9,23 @@ body {
 @layer base {
   @font-face {
     font-family: 'Poppins';
-    src: url('C:/Users/dudu_/OneDrive/Documents/Dudu/Portfolio/portfolio/public/fonts/Poppins-Regular.ttf');
+    src: url('./fonts/Poppins-Regular.ttf');
   }
   @font-face {
     font-family: 'Poppins Light';
-    src: url('C:/Users/dudu_/OneDrive/Documents/Dudu/Portfolio/portfolio/public/fonts/Poppins-Light.ttf');
+    src: url('./fonts/Poppins-Light.ttf');
   }
   @font-face {
     font-family: 'Poppins SemiBold';
-    src: url('C:/Users/dudu_/OneDrive/Documents/Dudu/Portfolio/portfolio/public/fonts/Poppins-SemiBold.ttf');
+    src: url('./fonts/Poppins-SemiBold.ttf');
   }
   @font-face {
     font-family: 'Poppins Bold';
-    src: url('C:/Users/dudu_/OneDrive/Documents/Dudu/Portfolio/portfolio/public/fonts/Poppins-Bold.ttf');
+    src: url('./fonts/Poppins-Bold.ttf');
   }
   @font-face {
     font-family: 'Podkova';
-    src: url('C:/Users/dudu_/OneDrive/Documents/Dudu/Portfolio/portfolio/public/fonts/Podkova-VariableFont_wght.ttf');
+    src: url('./fonts/Podkova-VariableFont_wght.ttf');
   }
 }
 
