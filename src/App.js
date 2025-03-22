@@ -538,7 +538,7 @@ function App() {
             </div>
             <div className='h-[1px] w-full bg-[#202122]'></div>
             <div className='flex w-full sm:justify-start justify-center'>
-              <p className='text-[#707070] sm:w-[-webkit-fill-available]'>© 2025, {t('Desenvolvido por')} <span className='text-[#2D5CFF]'>Dudu</span>.</p>
+              <p className='text-[#707070] sm:w-[-webkit-fill-available]'>© 2025 {t('Desenvolvido por')} <span className='text-[#2D5CFF]'>Dudu</span>.</p>
               <p className='text-[#707070] sm:flex hidden min-w-fit'>{t('Você faz a diferença.')}</p>
             </div>
             <svg className='absolute top-0 max-h-[212px] -z-10' viewBox="0 0 1402 212" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0L701 0L1402 0V212H0L0 0Z" fill="url(#paint0_radial_371_602)" fillOpacity="0.1" /><defs><radialGradient id="paint0_radial_371_602" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(701 -5.05447e-05) rotate(90) scale(212 701)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.6" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
