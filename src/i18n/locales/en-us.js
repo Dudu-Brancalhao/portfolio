@@ -35,5 +35,7 @@ export default {
         'Criando e refatorando interfaces para melhorar a experiência do cliente.': 'Creating and refactoring interfaces to improve the customer experience.',
         'Desenvolvido por': 'Developed by',
         'Você faz a diferença.': 'You make the difference.',
+        'Sistema de Delivery (B2B)': 'Delivery System (B2B)',
+        'Interface de Arquivos': 'Files Interface',
     }
 }

@@ -138,7 +138,7 @@ function App() {
                   {languageSelected === "en-US" ? "EN" : "PT"}
                 </span>
               </button>
-              <a className='relative hidden sm:flex min-h-fit text-white text-sm rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF] px-8 py-[6px] md:max-w-fit cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all'>
+              <a href="/dudu-cv.pdf" download className='relative hidden sm:flex min-h-fit text-white text-sm rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF] px-8 py-[6px] md:max-w-fit cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all'>
                 <span className="bg-blue-300 shadow-blue-400 absolute -right-[120%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
                 {t('Currículo')}
               </a>
@@ -296,6 +296,7 @@ function App() {
             <div className='flex gap-[10px]'>
               <div className='font-PoppinsBold text-white text-[12px] bg-gradient-to-r from-[#2D5CFF80] to-[#2D319080] flex justify-center w-[100px] py-[6px] rounded-[4px]'>LAYOUT</div>
               <div className='font-PoppinsBold text-white text-[12px] bg-[#1C1E22] flex justify-center w-[100px] py-[6px] rounded-[4px]'>UI/UX</div>
+              <div className='font-PoppinsBold text-white text-[12px] bg-[#1C1E22] flex justify-center w-[100px] py-[6px] rounded-[4px]'>FREELANCE</div>
             </div>
             <div className='flex flex-col gap-4'>
               <div className='font-PoppinsBold text-white text-3xl sm:text-4xl'>{t('Protótipos')}</div>
@@ -305,9 +306,23 @@ function App() {
             <div className='inline-flex h-[40px] gap-[20px]'>
               <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
                 <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
-                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.location.href = 'mailto:duduscala@gmail.com'}>
+                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.open('https://lavenderblush-elk-551218.hostingersite.com/', '_blank')}>
                   <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
-                  {t('Em breve')}
+                  Parlak Site
+                </a>
+              </div>
+              <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[228px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
+                <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
+                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.open('https://www.figma.com/proto/ykshatwUFkHmeBOYUP6sCJ/Portfolio-Prototypes?page-id=39%3A545&node-id=39-3554&p=f&viewport=161%2C140%2C0.13&t=QrOoMLAfpJUQluLe-1&scaling=contain&content-scaling=fixed&starting-point-node-id=39%3A3554&show-proto-sidebar=1', '_blank')}>
+                  <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
+                  {t('Sistema de Delivery (B2B)')}
+                </a>
+              </div>
+              <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[210px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
+                <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
+                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.open('https://www.figma.com/proto/ykshatwUFkHmeBOYUP6sCJ/Portfolio-Prototypes?page-id=4%3A3607&node-id=4-3817&viewport=345%2C277%2C0.08&t=may9qS1Qpnn5nDc8-1&scaling=contain&content-scaling=fixed&starting-point-node-id=4%3A3817', '_blank')}>
+                  <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
+                  {t('Interface de Arquivos')}
                 </a>
               </div>
             </div>
@@ -353,9 +368,9 @@ function App() {
             <div className='inline-flex h-[40px] gap-[20px]'>
               <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
                 <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
-                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.location.href = 'mailto:duduscala@gmail.com'}>
+                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.open('https://www.figma.com/proto/ykshatwUFkHmeBOYUP6sCJ/Portfolio-Prototypes?page-id=14%3A549&node-id=14-554&viewport=656%2C467%2C0.21&t=cpDFxF9XHsG2Q8v4-1&scaling=contain&content-scaling=fixed', '_blank')}>
                   <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
-                  {t('Em breve')}
+                  {t('Visualizar')}
                 </a>
               </div>
             </div>
