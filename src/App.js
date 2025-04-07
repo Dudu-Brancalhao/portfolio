@@ -306,7 +306,7 @@ function App() {
             <div className='inline-flex h-[40px] gap-[20px]'>
               <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
                 <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
-                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.open('https://lavenderblush-elk-551218.hostingersite.com/', '_blank')}>
+                <a className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]' onClick={() => window.open('https://parlakinteligencia.com.br/', '_blank')}>
                   <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
                   Parlak Site
                 </a>
