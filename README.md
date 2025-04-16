@@ -5,6 +5,8 @@ Welcome to my personal portfolio website! This is where I showcase my projects, 
 ## 🚀 Live Demo
 
 👉 [dudu-portfolio.com](https://dudu-portfolio.com)
+![image](https://github.com/user-attachments/assets/2cf3dd35-3c2b-48c3-bf8a-3fe562cd8b33)
+
 
 ## 📌 Features
 
