@@ -29,6 +29,35 @@ body {
   }
 }
 
+.dotted-circle {
+  position: absolute;
+  top: 0px;
+  left: -12%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+  /* This gradient gives the blue-to-transparent effect */
+  background: linear-gradient(135deg, #2D5CFF 0%, rgba(45, 49, 144, 0) 90%);
+
+  /* Mask creates the circular dashed effect */
+  -webkit-mask: 
+    radial-gradient(farthest-side, transparent calc(100% - 3px), black calc(100% - 1px)) 
+    0 0/100% 100%, 
+    repeating-conic-gradient(transparent 0deg, transparent 10deg, black 10deg, black 20deg);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+
+.bgcircle {
+  background: radial-gradient(50% 50% at 50% 50%, rgba(45, 92, 255, 0.20) 0%, rgba(45, 49, 144, 0.12) 60%, rgba(45, 49, 144, 0.004) 100%);
+}
+
+.bgelement {
+  display: none;
+}
+
 .tooltip-container {
   position: relative;
   display: inline-block;
