@@ -9,6 +9,7 @@ import timesheet_showcase from './midia/Timesheet_showcase.png';
 import intellij_logo from './midia/intellij_logo.png';
 import postman_logo from './midia/postman_logo.png';
 import dudu_portrait from './midia/Dudu_portrait.png';
+import BgDottedCircle from './dotted-circle.jsx';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import './App.css';
@@ -19,13 +20,13 @@ function App() {
     return (
       <>
         <div
-          className="bgcircle absolute left-0 top-0 w-[875px] h-[1400px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          className="bg-blurred-circle absolute left-0 top-0 w-[875px] h-[1400px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         />
         <div
-          className="bgcircle absolute right-0 top-[500px] w-[875px] h-[875px] rounded-full translate-x-1/2 pointer-events-none"
+          className="bg-blurred-circle absolute right-0 top-[500px] w-[875px] h-[875px] rounded-full translate-x-1/2 pointer-events-none"
         />
         {/* <div
-          className="bgcircle absolute left-0 w-[600px] h-[600px] rounded-full -translate-x-1/2 pointer-events-none"
+          className="bg-blurred-circle absolute left-0 w-[600px] h-[600px] rounded-full -translate-x-1/2 pointer-events-none"
         /> */}
       </>
     );
@@ -59,7 +60,8 @@ function App() {
       gsap.set('.header', { y: -100 });
       gsap.set('.mainbtn', { opacity: 0, y: 20 });
       gsap.set('.animate .line', { opacity: 0, y: '100%' });
-      gsap.set('.bgcircle', { opacity: 0 });
+      gsap.set('.bg-blurred-circle', { opacity: 0 });
+      gsap.set('.bg-dotted-circle', { opacity: 0 });
       gsap.set('.pic_element_1', { opacity: 0 });
       gsap.set('.pic_element_2', { opacity: 0 });
       gsap.set('.pic_element_3', { opacity: 0 });
@@ -84,7 +86,6 @@ function App() {
           ease: 'power2.out',
         })
 
-
         .add(() => {
           gsap.to(".animate .line", {
             y: 0,
@@ -93,6 +94,11 @@ function App() {
             ease: "power3.out",
             stagger: 0.2,
           })
+          gsap.to("#flat-text", {
+            delay: 1,
+            className: 'animate line font-PoppinsSemiBold text-2xl sm:text-3xl text-[#2D5CFF] hidden'
+          });
+          gsap.to("#gradient-text", { delay: 1, className: 'font-PoppinsSemiBold text-2xl sm:text-3xl visible' });
           gsap.to('.header', {
             y: 0,
             duration: 0.4,
@@ -103,7 +109,12 @@ function App() {
             duration: 0.4,
             ease: "power3.in",
           });
-          gsap.to('.bgcircle', {
+          gsap.to('.bg-blurred-circle', {
+            opacity: 1,
+            duration: 0.4,
+            ease: "power3.in",
+          });
+          gsap.to('.bg-dotted-circle', {
             opacity: 1,
             duration: 0.4,
             ease: "power3.in",
@@ -132,10 +143,13 @@ function App() {
       <div className="relative z-10">
         <BackgroundCircles />
         <header className='header sticky top-0 flex h-[64px] backdrop-blur-[30px] shadow-[0px_0px_30px_rgba(227,228,237,0.05)] border-b-[1px] border-[#ffffff0D] z-[98]'>
-          <div className='max-w-[88rem] mx-auto flex content-row w-full px-6'>
-            <div className='flex content-row items-center justify-start w-full gap-2'>
-              <img src={logo} className='w-[24px] h-[24px]' alt='logo' />
-              <p className='font-Podkova text-xl text-white'>Dudu</p>
+          <div className='max-w-[88rem] mx-auto flex items-center w-full px-6'>
+            <div className='group flex items-center justify-start w-full gap-2 cursor-pointer'>
+              <img src={logo} className='w-[24px] h-[24px] z-[98]' alt='logo' />
+              {/* <p className='font-Podkova text-xl text-white -translate-x-[40%] group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ease-in-out'>Dudu</p> */}
+              <div className="overflow-hidden w-fit pl-[22px] -translate-x-[30%]">
+                <p className='font-Podkova text-xl text-white -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ease-in-out'>Dudu</p>
+              </div>
             </div>
             <div className='hidden sm:flex content-row items-center justify-center w-full gap-4'>
               <a href='#home' className='flex justify-center px-4 text-gray-300 text-sm hover:text-white transition-all cursor-pointer'>{t('Início')}</a>
@@ -182,15 +196,28 @@ function App() {
         </header>
         <div id='home' className='body max-w-[88rem] mx-auto md:h-[850px] flex flex-col-reverse md:flex-row items-center pt-[1rem] md:pt-[8rem] pb-[1rem] md:pb-[8rem] gap-12 z-10 px-6'>
           <div className='relative w-full h-full flex flex-col gap-10 md:text-left sm:pt-20'>
-            <div class="dotted-circle"></div>
+            <BgDottedCircle top="0px" left="-12%" degrees={135} />
             <div className='flex flex-col gap-4'>
               <div className="animate line font-PoppinsLight text-white text-lg">{t('Olá 👋🏻, eu sou')}</div>
               <div className='animate line font-PoppinsBold text-white text-3xl sm:text-5xl'>Eduardo Brancalhão</div>
-              <div className='animate line text-2xl sm:text-3xl text-[#2D5CFF]'>{t('Desenvolvedor Fullstack')}</div>
-              <div className={`animate line text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>
+              <div className="relative">
+                <div id="flat-text" className='animate line font-PoppinsSemiBold text-2xl sm:text-3xl text-[#2D5CFF]'>
+                  {t('Desenvolvedor Fullstack')}
+                </div>
+                <div id="gradient-text" className='font-PoppinsSemiBold text-2xl sm:text-3xl hidden' style={{
+                  background: 'linear-gradient(135deg, #2D5CFF 0%, rgba(45, 49, 144, 0.8) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textFillColor: 'transparent',
+                }} >
+                  {t('Desenvolvedor Fullstack')}
+                </div>
+              </div>
+              <div className={`animate line text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>
                 Sou um desenvolvedor fullstack com três anos de experiência, possuo conhecimento em <span className="font-PoppinsSemiBold text-white">Java</span>, <span className="font-PoppinsSemiBold text-white">Spring Boot</span> e <span className="font-PoppinsSemiBold text-white">React</span>. Atualmente trabalho com <span className="font-PoppinsSemiBold text-white">Power Platform</span>, <span className="font-PoppinsSemiBold text-white">Power Apps</span> e <span className="font-PoppinsSemiBold text-white">Power Automate</span>
               </div>
-              <div className={`animate line text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>
+              <div className={`animate line text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>
                 I am a fullstack developer with three years of experience, I have knowledge in <span className="font-PoppinsSemiBold text-white">Java</span>, <span className="font-PoppinsSemiBold text-white">Spring Boot</span> and <span className="font-PoppinsSemiBold text-white">React</span>. I currently work with <span className="font-PoppinsSemiBold text-white">Power Platform</span>, <span className="font-PoppinsSemiBold text-white">Power Apps</span> and <span className="font-PoppinsSemiBold text-white">Power Automate</span>
               </div>
             </div>
@@ -213,30 +240,34 @@ function App() {
                 <div role="tooltip" id="help-tooltip" className="tooltip">LinkedIn</div>
               </div>
             </div>
-            <svg className="bgelement absolute left-[-85px] md:top-[-15px] top-[-65px] w-[35vw] md:max-w-[200px] max-w-[130px] -z-10" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="100" cy="100" r="99.5" transform="rotate(180 100 100)" stroke="#2D5CFF" strokeDasharray="10 10" />
-            </svg>
           </div>
           <div className='relative w-full h-[-webkit-fill-available] flex justify-center items-center pt-5 sm:pt-0'>
             <img src={dudu_photo} alt='dudu-photo' className='image_photo md:h-[-webkit-fill-available] object-contain' />
             <svg className='pic_element_1 absolute top-0 right-[33%] md:w-[80px] w-[50px] backdrop-blur-[4px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_537)" fillOpacity="0.3" /><path d="M56.4215 22.3402C55.8661 23.674 55.1473 24.9334 54.2815 26.0896C52.428 24.1697 50.2086 22.6416 47.7547 21.5957C45.3009 20.5497 42.6624 20.0071 39.9954 20.0001C37.3285 19.993 34.6872 20.5216 32.2278 21.5545C29.7685 22.5875 27.5411 24.1038 25.6774 26.0138C23.8137 27.9238 22.3516 30.1887 21.3775 32.6744C20.4035 35.1601 19.9374 37.8161 20.0067 40.4854C20.0761 43.1546 20.6795 45.7828 21.7812 48.2145C22.883 50.6461 24.4607 52.8318 26.421 54.6423L27.1618 55.3015C29.9728 57.675 33.3852 59.2233 37.021 59.7749C40.6568 60.3265 44.3741 59.8598 47.7613 58.4265C51.1485 56.9932 54.0733 54.6493 56.212 51.6544C58.3506 48.6594 59.6196 45.1303 59.8783 41.4578C60.4545 36.4312 58.9318 30.0037 56.4215 22.3402ZM29.3017 54.8071C29.0901 55.0674 28.8062 55.2591 28.4859 55.3579C28.1655 55.4567 27.8231 55.4582 27.5018 55.3623C27.1806 55.2663 26.895 55.0771 26.6811 54.8187C26.4672 54.5603 26.3346 54.2442 26.3001 53.9103C26.2656 53.5765 26.3308 53.2399 26.4873 52.9431C26.6438 52.6463 26.8847 52.4026 27.1795 52.2428C27.4743 52.083 27.8098 52.0144 28.1436 52.0454C28.4774 52.0765 28.7945 52.2059 29.0548 52.4174C29.3961 52.7068 29.6124 53.1171 29.6584 53.5625C29.7044 54.0079 29.5766 54.4538 29.3017 54.8071ZM56.298 48.8328C51.4008 55.3839 40.8657 53.159 34.1578 53.4886C34.1578 53.4886 32.9643 53.571 31.7709 53.7358C31.7709 53.7358 32.2236 53.5298 32.7997 53.3238C37.5323 51.6757 39.7546 51.3461 42.6353 49.8629C48.0263 47.1024 53.4173 41.0457 54.4873 34.7831C52.4297 40.7985 46.1744 45.9899 40.4953 48.0912C36.5858 49.5333 29.5487 50.9341 29.5487 50.9341L29.2606 50.7693C24.4868 48.4208 24.3222 38.038 33.0467 34.7007C36.8739 33.2174 40.4953 34.0415 44.6518 33.0526C49.0551 32.0226 54.1581 28.7265 56.2157 24.4003C58.5203 31.3634 61.3187 42.1582 56.298 48.8328Z" fill="#6DB33F" /><defs><linearGradient id="paint0_linear_198_537" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_2 absolute left-[9%] top-[20%] md:w-[80px] w-[50px] backdrop-blur-[4px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_546)" fillOpacity="0.3" /><path d="M40.427 39.9998C40.427 36.3179 43.4118 33.3332 47.0937 33.3332C50.7756 33.3332 53.7604 36.318 53.7604 39.9998C53.7604 43.6818 50.7755 46.6665 47.0937 46.6665C43.4117 46.6665 40.427 43.6817 40.427 39.9998Z" fill="#00BCFF" /><path d="M27.0939 53.3333C27.0939 49.6514 30.0787 46.6666 33.7606 46.6666L37.3133 44.7909L40.4272 46.6666V53.3333C40.4272 57.0153 37.4425 60 33.7606 60C30.0787 60 27.0939 57.0152 27.0939 53.3333Z" fill="#00CF7F" /><path d="M40.4271 20L36.7994 26.3024L40.4271 33.3334H47.0003C50.6823 33.3334 53.667 30.3486 53.667 26.6667C53.667 22.9848 50.6822 20 47.0003 20H40.4271Z" fill="#FF7361" /><path d="M27 26.6667C27 30.3486 29.9848 33.3334 33.6667 33.3334L37.2032 34.6993L40.4269 33.3334V20H33.6666C29.9848 20 27 22.9848 27 26.6667Z" fill="#FF4D12" /><path d="M27.0939 39.9999C27.0939 43.6819 30.0787 46.6666 33.7606 46.6666H40.4272V33.3332H33.7606C30.0787 33.3332 27.0939 36.318 27.0939 39.9999Z" fill="#B659FF" /><defs><linearGradient id="paint0_linear_198_546" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
-            <svg className='pic_element_3 absolute right-[17%] top-[30%] md:w-[80px] w-[50px] backdrop-blur-[2px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_538)" fillOpacity="0.3" /><path d="M24.8632 44.3319H36.771L29.7664 59.0784C29.2994 60.3072 27.665 60.3072 27.1981 59.0784L22.2949 48.7558C21.3609 46.7897 22.7618 44.3319 24.8632 44.3319Z" fill="url(#paint1_linear_198_538)" /><path d="M35.6036 20H51.9476C56.6173 20 59.6526 25.1613 57.5512 29.3394L52.1811 40.645C54.0489 36.2211 51.2471 31.3056 46.5774 31.3056H31.6343C30.4669 31.3056 29.7665 30.0767 30.2334 29.0936L34.2027 20.9831C34.6697 20.2458 35.1366 20 35.6036 20Z" fill="url(#paint2_linear_198_538)" /><path d="M35.6036 20H51.9476C56.6173 20 59.6526 25.1613 57.5512 29.3394L52.1811 40.645C54.2824 36.2211 51.2471 31.3056 46.5774 31.3056H31.6343C30.4669 31.3056 29.7665 30.0767 30.2334 29.0936L34.2027 20.9831C34.6697 20.2458 35.1366 20 35.6036 20Z" fill="url(#paint3_linear_198_538)" /><path d="M46.5764 44.5775H24.8623C23.6949 44.5775 22.7609 45.3148 22.2939 46.2979L27.6641 34.9923C28.1311 34.0092 29.2985 33.2719 30.2325 33.2719H51.9466C54.2815 33.2719 56.3828 31.7973 57.5503 29.5853L58.0172 28.848L52.1801 40.8909C51.0127 43.1029 48.9113 44.5775 46.5764 44.5775Z" fill="black" fillOpacity="0.24" /><path d="M46.5764 45.3143H24.8623C23.6949 45.3143 22.7609 46.0516 22.2939 47.0347L27.6641 35.7291C28.1311 34.5002 29.2985 34.0087 30.2325 34.0087H51.9466C54.2815 34.0087 56.3828 32.534 57.5502 30.3221L57.7837 29.5847L52.1801 41.6277C51.0127 43.8397 48.9113 45.3143 46.5764 45.3143Z" fill="black" fillOpacity="0.32" /><path d="M46.5773 44.3314H24.8631C23.6957 44.3314 22.7618 45.0687 22.2948 46.0518L27.665 34.7462C28.1319 33.7631 29.2994 33.0258 30.2333 33.0258H51.9475C54.2823 33.0258 56.3837 31.5512 57.5511 29.3392L58.0181 28.6019L52.1809 40.8906C51.0135 43.1025 48.9121 44.3314 46.5773 44.3314Z" fill="url(#paint4_linear_198_538)" /><path opacity="0.7" d="M46.5771 44.3314H25.0964C23.929 44.3314 22.995 45.0687 22.5281 46.0518L27.8982 34.7462C28.3652 33.7631 29.5326 33.0258 30.4666 33.0258H52.1807C54.5156 33.0258 56.617 31.7969 57.5509 29.5849L52.1807 40.8905C51.0133 43.1025 48.9119 44.3314 46.5771 44.3314Z" fill="url(#paint5_linear_198_538)" /><defs><linearGradient id="paint0_linear_198_538" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient><linearGradient id="paint1_linear_198_538" x1="28.6816" y1="43.1918" x2="33.2313" y2="59.6155" gradientUnits="userSpaceOnUse"><stop stopColor="#159455" /><stop offset="1" stopColor="#3FBDA9" /></linearGradient><linearGradient id="paint2_linear_198_538" x1="31.0252" y1="21.3778" x2="55.4053" y2="31.6752" gradientUnits="userSpaceOnUse"><stop stopColor="#23A794" /><stop offset="0.5684" stopColor="#007A84" /><stop offset="1" stopColor="#005158" /></linearGradient><linearGradient id="paint3_linear_198_538" x1="47.9146" y1="37.8919" x2="43.1696" y2="26.0854" gradientUnits="userSpaceOnUse"><stop stopColor="#004A8B" /><stop offset="0.4056" stopColor="#105DA8" stopOpacity="0.5002" /><stop offset="1" stopColor="#2170C6" stopOpacity="0" /></linearGradient><linearGradient id="paint4_linear_198_538" x1="29.1504" y1="31.7018" x2="51.2821" y2="42.1144" gradientUnits="userSpaceOnUse"><stop stopColor="#7FD9A2" /><stop offset="0.1961" stopColor="#47BF79" /><stop offset="0.7139" stopColor="#009280" /><stop offset="1" stopColor="#007A84" /></linearGradient><linearGradient id="paint5_linear_198_538" x1="28.99" y1="32.1026" x2="34.0503" y2="34.5063" gradientUnits="userSpaceOnUse"><stop stopColor="#A8E47C" stopOpacity="0.86" /><stop offset="0.3675" stopColor="#87D152" stopOpacity="0.2" /><stop offset="1" stopColor="#58BE5A" stopOpacity="0" /></linearGradient></defs></svg>
+            <svg className='pic_element_3 absolute right-[18%] top-[30%] md:w-[80px] w-[50px] backdrop-blur-[4px]' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><foreignObject x="-4" y="-4" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml"></div></foreignObject><g data-figma-bg-blur-radius="4"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_564_3402)" fill-opacity="0.3" /><path d="M40 44.4531C42.4594 44.4531 44.4531 42.4594 44.4531 40C44.4531 37.5406 42.4594 35.5469 40 35.5469C37.5406 35.5469 35.5469 37.5406 35.5469 40C35.5469 42.4594 37.5406 44.4531 40 44.4531Z" fill="#61DAFB" /><path d="M56.9141 32.6562C56.0547 32.3437 55.1563 32.0313 54.2188 31.7578C54.4531 30.8203 54.6484 29.8828 54.8047 28.9844C55.625 23.8281 54.7266 20.1953 52.2266 18.7891C51.4844 18.3594 50.6641 18.1641 49.7266 18.1641C46.9922 18.1641 43.5156 20.1953 40 23.5937C36.4844 20.1953 33.0078 18.1641 30.2734 18.1641C29.3359 18.1641 28.5156 18.3594 27.7734 18.7891C25.2734 20.2344 24.375 23.8672 25.1953 28.9844C25.3516 29.8828 25.5469 30.8203 25.7813 31.7578C24.8438 32.0313 23.9453 32.3047 23.0859 32.6562C18.2031 34.5312 15.5469 37.1094 15.5469 40C15.5469 42.8906 18.2422 45.4688 23.0859 47.3438C23.9453 47.6563 24.8438 47.9688 25.7813 48.2422C25.5469 49.1797 25.3516 50.1172 25.1953 51.0156C24.375 56.1719 25.2734 59.8047 27.7734 61.2109C28.5156 61.6406 29.3359 61.8359 30.2734 61.8359C33.0469 61.8359 36.5234 59.8047 40 56.4063C43.5156 59.8047 46.9922 61.8359 49.7266 61.8359C50.6641 61.8359 51.4844 61.6406 52.2266 61.2109C54.7266 59.7656 55.625 56.1328 54.8047 51.0156C54.6484 50.1172 54.4531 49.1797 54.2188 48.2422C55.1563 47.9688 56.0547 47.6953 56.9141 47.3438C61.7969 45.4688 64.4531 42.8906 64.4531 40C64.4531 37.1094 61.7969 34.5312 56.9141 32.6562ZM51.1328 20.7422C52.7344 21.6797 53.2813 24.5703 52.6172 28.6719C52.5 29.4922 52.3047 30.3516 52.0703 31.25C50.0391 30.7812 47.8906 30.4687 45.625 30.2734C44.2969 28.3984 42.9297 26.7188 41.5625 25.1953C44.4531 22.3437 47.3828 20.3906 49.7656 20.3906C50.2734 20.3906 50.7422 20.5078 51.1328 20.7422ZM46.7578 43.9063C46.0547 45.1563 45.2344 46.4062 44.375 47.6562C42.9297 47.7734 41.4844 47.8125 40 47.8125C38.4766 47.8125 37.0312 47.7734 35.625 47.6562C34.7656 46.4062 33.9844 45.1563 33.2812 43.9063C32.5391 42.6172 31.8359 41.2891 31.2109 40C31.8359 38.7109 32.5391 37.3828 33.2812 36.0938C33.9844 34.8438 34.8047 33.5938 35.6641 32.3438C37.1094 32.2266 38.5547 32.1875 40.0391 32.1875C41.5625 32.1875 43.0078 32.2266 44.4141 32.3438C45.2734 33.5938 46.0547 34.8438 46.7578 36.0938C47.5 37.3828 48.2031 38.7109 48.8281 40C48.1641 41.2891 47.5 42.5781 46.7578 43.9063ZM50 42.6172C50.5859 43.9844 51.0547 45.3125 51.4844 46.6406C50.1562 46.9531 48.75 47.1875 47.2656 47.3828C47.7344 46.6406 48.2422 45.8594 48.6719 45.0391C49.1406 44.2188 49.5703 43.3984 50 42.6172ZM40 53.2031C39.0625 52.1875 38.1641 51.0938 37.3047 49.9609C38.2031 50 39.1016 50.0391 40 50.0391C40.8984 50.0391 41.7969 50 42.6953 49.9609C41.8359 51.0938 40.9375 52.1875 40 53.2031ZM32.7344 47.3438C31.25 47.1484 29.8437 46.9141 28.5156 46.6016C28.9453 45.3125 29.4141 43.9453 30 42.5781C30.4297 43.3594 30.8594 44.1797 31.3281 44.9609C31.7969 45.8203 32.2656 46.5625 32.7344 47.3438ZM30 37.3828C29.4141 36.0156 28.9453 34.6875 28.5156 33.3594C29.8437 33.0469 31.25 32.8125 32.7344 32.6172C32.2656 33.3594 31.7578 34.1406 31.3281 34.9609C30.8594 35.7812 30.4297 36.6016 30 37.3828ZM40 26.7969C40.9375 27.8125 41.8359 28.9062 42.6953 30.0391C41.7969 30 40.8984 29.9609 40 29.9609C39.1016 29.9609 38.2031 30 37.3047 30.0391C38.1641 28.9062 39.0625 27.8125 40 26.7969ZM48.6719 35L47.2656 32.6562C48.75 32.8516 50.1562 33.0859 51.4844 33.3984C51.0547 34.6875 50.5859 36.0547 50 37.4219C49.5703 36.6016 49.1406 35.7812 48.6719 35ZM27.3828 28.6719C26.7188 24.5703 27.2656 21.6797 28.8672 20.7422C29.2578 20.5078 29.7266 20.3906 30.2344 20.3906C32.5781 20.3906 35.5078 22.3047 38.4375 25.1953C37.0703 26.6797 35.7031 28.3984 34.375 30.2734C32.1094 30.4687 29.9609 30.8203 27.9297 31.25C27.6953 30.3516 27.5391 29.4922 27.3828 28.6719ZM17.7344 40C17.7344 38.1641 19.9609 36.2109 23.8672 34.7656C24.6484 34.4531 25.5078 34.1797 26.3672 33.9453C26.9922 35.8984 27.7734 37.9687 28.7109 40.0391C27.7734 42.1094 26.9531 44.1406 26.3672 46.0938C20.9766 44.5312 17.7344 42.1875 17.7344 40ZM28.8672 59.2578C27.2656 58.3203 26.7188 55.4297 27.3828 51.3281C27.5 50.5078 27.6953 49.6484 27.9297 48.75C29.9609 49.2188 32.1094 49.5313 34.375 49.7266C35.7031 51.6016 37.0703 53.2813 38.4375 54.8047C35.5469 57.6563 32.6172 59.6094 30.2344 59.6094C29.7266 59.6094 29.2578 59.4922 28.8672 59.2578ZM52.6172 51.3281C53.2813 55.4297 52.7344 58.3203 51.1328 59.2578C50.7422 59.4922 50.2734 59.6094 49.7656 59.6094C47.4219 59.6094 44.4922 57.6953 41.5625 54.8047C42.9297 53.3203 44.2969 51.6016 45.625 49.7266C47.8906 49.5313 50.0391 49.1797 52.0703 48.75C52.3047 49.6484 52.4609 50.5078 52.6172 51.3281ZM56.1328 45.2344C55.3516 45.5469 54.4922 45.8203 53.6328 46.0547C53.0078 44.1016 52.2266 42.0313 51.2891 39.9609C52.2266 37.8906 53.0469 35.8594 53.6328 33.9063C59.0234 35.4688 62.2656 37.8125 62.2656 40C62.2656 41.8359 60 43.7891 56.1328 45.2344Z" fill="#61DAFB" /></g><defs><clipPath id="bgblur_0_564_3402_clip_path" transform="translate(4 4)"><rect width="80" height="80" rx="40" /></clipPath><linearGradient id="paint0_linear_564_3402" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#2D3190" /><stop offset="1" stop-color="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_4 absolute top-0 left-[12%] md:w-[30px] w-[18px]' viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="15" fill="url(#paint0_linear_198_554)" fillOpacity="0.5" /><defs><linearGradient id="paint0_linear_198_554" x1="0" y1="15" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_5 absolute bottom-[17%] right-[14%] md:w-[30px] w-[18px] flex -z-10' viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="15" fill="url(#paint0_linear_198_554)" fillOpacity="0.5" /><defs><linearGradient id="paint0_linear_198_554" x1="0" y1="15" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
-            <svg className='bgelement absolute md:right-[110px] right-[50px] md:w-[55%] w-[70%] flex -z-10' viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="200" cy="200" r="199.5" transform="rotate(180 200 200)" stroke="#2D5CFF" strokeDasharray="10 10" /></svg>
-            <svg className='bgelement absolute md:left-[-45px] md:max-w-[100%] max-w-[75%] -z-10' viewBox="0 0 875 875" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 437.5C0 195.875 198.39 0 440.014 0C678.878 0 875 193.637 875 432.5V437.5C875 679.125 679.125 875 437.5 875C195.875 875 0 679.125 0 437.5Z" fill="url(#paint0_radial_172_706)" fillOpacity="0.4" /><defs><radialGradient id="paint0_radial_172_706" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(437.5 437.5) rotate(90) scale(437.5 437.5)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.5" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
-            <div className="bgcircle absolute left-[45%] w-[600px] h-[600px] rounded-full -translate-x-1/2 pointer-events-none z-[-10]" />
+            <BgDottedCircle bottom="20%" right="10%" height="350px" width="350px" degrees={250} />
+            <div className="bg-blurred-circle absolute left-[45%] w-[600px] h-[600px] rounded-full -translate-x-1/2 pointer-events-none z-[-10]" />
           </div>
         </div>
         <div id='projects' className='max-w-[88rem] mx-auto flex items-center pt-[2rem] md:pt-[3rem] pb-[2rem] md:pb-[3rem] gap-12 z-10 px-6'>
           <div className='flex flex-row w-full items-center gap-[20px] md:gap-[40px]'>
-            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]'></div>
+            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#002D3190] to-[#2D5CFF]'></div>
             <div className='flex flex-col min-w-fit items-center gap-1'>
-              <p className='text-[#2D5CFF]'>{t('Projetos')}</p>
-              <p className='text-[#9C9C9C] text-sm'>{t('Conheça meu trabalho')}</p>
+              <div className='font-PoppinsBold text-2xl sm:text-3xl' style={{
+                background: 'linear-gradient(135deg, #2D5CFF 0%, rgba(45, 49, 144, 0.8) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textFillColor: 'transparent',
+              }} >
+                {t('Projetos')}
+              </div>
+              <p className='text-[#94A3B8] text-sm'>{t('Conheça meu trabalho')}</p>
             </div>
-            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D5CFF] to-[#2D3190]'></div>
+            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D5CFF] to-[#002D3190]'></div>
           </div>
         </div>
         <div className='body max-w-[88rem] mx-auto md:h-[850px] flex flex-col md:flex-row items-center pt-[3rem] md:pt-[8rem] pb-[3rem] md:pb-[8rem] md:gap-12 gap-[10px] z-10 px-6'>
@@ -254,8 +285,8 @@ function App() {
             </div>
             <div className='flex flex-col gap-4'>
               <div className='font-PoppinsBold text-white text-3xl sm:text-4xl'>BarberShop</div>
-              <div className='text-[#9C9C9C] leading-[30px]'>{t('Aplicativo para controle de agenda para barbearias, onde clientes podem realizar o agendamento de serviços de forma autônoma, escolhendo serviço, profissional, data e horário.')}</div>
-              <div className='text-[#9C9C9C] leading-[30px]'>{t('Por outro lado, profissionais gerenciam seus horários disponíveis. Tudo em uma interface intuitiva e eficiente.')}</div>
+              <div className='text-[#94A3B8] leading-[30px]'>{t('Aplicativo para controle de agenda para barbearias, onde clientes podem realizar o agendamento de serviços de forma autônoma, escolhendo serviço, profissional, data e horário.')}</div>
+              <div className='text-[#94A3B8] leading-[30px]'>{t('Por outro lado, profissionais gerenciam seus horários disponíveis. Tudo em uma interface intuitiva e eficiente.')}</div>
             </div>
             <div className='inline-flex h-[40px] gap-[20px]'>
               <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
@@ -269,7 +300,7 @@ function App() {
             </div>
             <div className='h-[-webkit-fill-available]'></div>
             <div className='flex flex-col gap-4'>
-              <div className='text-[#9C9C9C]'>{t('Desenvolvido com')}</div>
+              <div className='text-[#94A3B8]'>{t('Desenvolvido com')}</div>
               <div className='inline-flex gap-[20px] flex-wrap'>
                 <div className="tooltip-container">
                   <div className='inline-flex items-center justify-center p-[10px] rounded-[8px] bg-[#1C1E22] hover:scale-110 transition-all'><svg className='lg:w-[30px] lg:h-[30px] w-[25px] h-[25px]' viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_213_1827)"><path d="M25.9067 25.4804C26.1294 23.6257 26.0626 23.3537 27.4441 23.6541L27.7948 23.6849C28.8571 23.7332 30.2467 23.514 31.0631 23.1348C32.8204 22.3194 33.8625 20.9579 32.1297 21.3156C28.1769 22.131 27.9052 20.7926 27.9052 20.7926C32.079 14.5997 33.8239 6.73831 32.3178 4.81398C28.21 -0.434827 21.0995 2.04721 20.9806 2.11167L20.9428 2.11865C20.1618 1.95661 19.2877 1.85978 18.3058 1.8439C16.517 1.81448 15.1598 2.31286 14.1302 3.09378C14.1302 3.09378 1.44552 -2.13217 2.03559 9.6659C2.16109 12.1757 5.63311 28.657 9.7741 23.6789C11.2876 21.8585 12.7503 20.3194 12.7503 20.3194C13.4766 20.8019 14.3461 21.0481 15.2582 20.9596L15.3287 20.8996C15.3066 21.1256 15.3163 21.3466 15.3569 21.6084C14.2902 22.8003 14.6036 23.0096 12.4709 23.4486C10.3131 23.8933 11.5808 24.6851 12.4083 24.892C13.4117 25.1429 15.7329 25.4984 17.3018 23.3026L17.2393 23.5532C17.6578 23.8879 17.6295 25.9594 17.6888 27.4394C17.7482 28.9196 17.8473 30.3007 18.149 31.115C18.4507 31.9292 18.8067 34.0267 21.6097 33.426C23.9523 32.924 25.7434 32.2014 25.9066 25.4802" fill="black" /><path d="M20.6958 35.0001C19.4216 35.0001 18.5897 34.505 18.0836 34.0273C17.3231 33.3096 17.024 32.3933 16.8454 31.8458C16.8174 31.7599 16.7909 31.6789 16.7712 31.6256C16.4129 30.6586 16.292 29.2763 16.2206 27.4984C16.21 27.2355 16.2022 26.9545 16.1942 26.6677C16.1892 26.4909 16.1836 26.2863 16.1761 26.072C14.9713 26.6002 13.5595 26.6946 12.0518 26.3176C11.3776 26.149 10.6786 25.8081 10.2437 25.2851C9.04307 26.2832 7.90213 26.1365 7.27359 25.927C6.15161 25.5527 5.15218 24.5104 4.21818 22.7406C3.55954 21.4925 2.92279 19.8678 2.32574 17.9115C1.2869 14.5078 0.627023 10.9189 0.568036 9.73934C0.382179 6.02412 1.38701 3.36402 3.55447 1.83296C5.34447 0.568507 7.79168 0.180233 10.8277 0.678611C12.1187 0.89054 13.2364 1.22256 13.9331 1.45803C15.1911 0.711458 16.6644 0.347066 18.33 0.37478C19.2191 0.389151 20.0663 0.466819 20.8543 0.605801C21.7006 0.343371 23.3235 -0.0217734 25.1709 0.00115072C28.6353 0.0424826 31.5068 1.39364 33.475 3.90845C34.8222 5.62996 34.3214 9.02513 33.6641 11.5701C32.9276 14.4218 31.6482 17.4512 30.0749 20.1076C30.4917 20.0958 31.0629 20.0354 31.8327 19.8765C33.7529 19.48 34.2859 20.6094 34.4033 20.965C34.9986 22.767 32.4705 24.1015 31.6815 24.4677C30.6831 24.9314 29.0576 25.2133 27.7279 25.1528L27.6664 25.1487L27.4275 25.1277C27.4204 25.1884 27.4133 25.2492 27.4064 25.3087C27.3961 25.3969 27.3853 25.4894 27.3738 25.5862C27.2847 29.0121 26.7917 31.1864 25.7779 32.63C24.7055 34.1569 23.223 34.5832 21.9176 34.8629C21.4714 34.9584 21.065 35.0001 20.6958 35.0001ZM18.1572 22.4057C18.9959 23.0766 19.0682 24.3004 19.1319 26.5859C19.1396 26.8603 19.147 27.1292 19.1571 27.3807C19.1871 28.1275 19.2573 29.8766 19.527 30.6046C19.5668 30.7121 19.602 30.8199 19.6393 30.9341C19.9437 31.8672 20.0699 32.2533 21.302 31.9894C22.3885 31.7565 22.9454 31.5499 23.3731 30.941C24.0131 30.0296 24.3713 28.1804 24.4378 25.4446L25.906 25.4804L24.4478 25.3053C24.462 25.1867 24.4751 25.0748 24.4874 24.9691C24.6149 23.8739 24.7155 23.0088 25.4972 22.4503C25.9905 22.0979 26.5454 22.0509 27.0266 22.0947C26.6295 21.6899 26.5038 21.2747 26.4652 21.0852L26.3428 20.482L26.6868 19.9716C28.5078 17.2698 30.0118 13.9479 30.813 10.858C31.6307 7.70497 31.4003 6.03465 31.1607 5.71967C27.8949 1.54692 22.2121 3.25036 21.5857 3.45538L21.476 3.51484L20.926 3.61612L20.6443 3.55761C19.9294 3.40932 19.1347 3.32714 18.2821 3.31332C16.9583 3.29258 15.891 3.60278 15.0183 4.2647L14.3481 4.77294L13.5706 4.45261C12.0498 3.83106 7.5855 2.57878 5.24614 4.23637C3.95753 5.14923 3.37115 6.95142 3.50329 9.59269C3.549 10.507 4.16994 13.939 5.194 17.2398C6.60113 21.7754 7.84294 23.0352 8.19583 23.1378C8.23997 23.1193 8.3964 23.0378 8.6446 22.7394C10.1716 20.9029 11.6242 19.3717 11.6853 19.3074L12.5355 18.4126L13.5636 19.0957C13.9174 19.3308 14.3062 19.4678 14.7055 19.5005L17.1454 17.4217L16.7913 21.0428C16.7845 21.1112 16.7815 21.2052 16.8091 21.3837L16.9154 22.0705L16.452 22.5884C16.4477 22.593 16.4436 22.5977 16.4395 22.6023L17.5793 23.1283L18.1572 22.4057Z" fill="black" /><path d="M32.13 21.3155C28.1769 22.1309 27.9051 20.7924 27.9051 20.7924C32.0789 14.5991 33.8238 6.73761 32.318 4.81355C28.2103 -0.434988 21.0995 2.04719 20.9808 2.11165L20.9427 2.11849C20.1617 1.95638 19.2876 1.85975 18.3053 1.84374C16.5166 1.81445 15.1598 2.3127 14.1301 3.09342C14.1301 3.09342 1.44522 -2.13227 2.03515 9.66574C2.16066 12.1757 5.63261 28.657 9.77374 23.6789C11.2873 21.8586 12.7498 20.3195 12.7498 20.3195C13.4762 20.802 14.3457 21.0481 15.2573 20.9597L15.3282 20.8996C15.3061 21.1256 15.3163 21.3467 15.3566 21.6084C14.2897 22.8003 14.6032 23.0097 12.4706 23.4486C10.3126 23.8934 11.5804 24.6851 12.408 24.892C13.4114 25.143 15.7329 25.4984 17.3013 23.3027L17.2388 23.5532C17.6568 23.888 17.9503 25.7309 17.9011 27.4016C17.8519 29.0723 17.8191 30.2193 18.1484 31.1152C18.4778 32.0111 18.8061 34.0268 21.6096 33.4261C23.9522 32.9241 25.1662 31.6232 25.335 29.4531C25.4548 27.9104 25.7261 28.1384 25.7432 26.7592L25.9607 26.1062C26.2116 24.0149 26.0006 23.3402 27.4438 23.654L27.7945 23.6848C28.8568 23.7331 30.2471 23.5139 31.063 23.1347C32.8201 22.3193 33.8622 20.9578 32.1297 21.3155H32.13V21.3155Z" fill="#336791" /><path d="M20.8358 34.0892C18.4769 34.0894 17.7301 32.2222 17.4245 31.4582C16.9768 30.3384 16.8795 26.1524 16.9816 22.5005C16.9891 22.2301 17.2146 22.0186 17.4849 22.0245C17.7553 22.0321 17.9684 22.2575 17.9609 22.5278C17.8471 26.5949 18.0075 30.2777 18.3341 31.0944C18.8402 32.3594 19.6082 33.4662 21.7768 33.0013C23.8687 32.5528 24.6127 31.7997 24.9613 29.778C25.2278 28.2333 25.7552 23.8344 25.8204 22.9653C25.8406 22.6956 26.0764 22.4936 26.3454 22.5136C26.6151 22.5338 26.8174 22.7689 26.7971 23.0387C26.7293 23.9441 26.2036 28.3392 25.9265 29.9444C25.5129 32.3431 24.4438 33.4313 21.982 33.9591C21.5629 34.049 21.1819 34.0892 20.8358 34.0892Z" fill="white" /><path d="M8.16858 25.0503C7.94099 25.0503 7.73446 25.0085 7.55545 24.9488C6.02562 24.4386 4.57182 21.9581 3.23435 17.5764C2.21815 14.2473 1.57443 10.7712 1.51791 9.64098C1.34991 6.28228 2.21658 3.90495 4.09397 2.57487C7.80303 -0.0529279 14.0324 2.4456 14.2958 2.55317C14.5462 2.65555 14.6662 2.94152 14.5639 3.1919C14.4615 3.44236 14.1756 3.56232 13.9252 3.45994C13.8534 3.43072 7.92395 1.05948 4.65852 3.37536C3.07367 4.49933 2.34619 6.59091 2.49632 9.59199C2.54382 10.541 3.14409 13.9251 4.17129 17.2903C5.35849 21.1797 6.70493 23.6324 7.86537 24.0195C8.04336 24.0789 8.58512 24.2596 9.36933 23.3167C10.8761 21.5039 12.2604 20.0569 12.2742 20.0425C12.4614 19.8472 12.7714 19.8406 12.9667 20.0279C13.162 20.215 13.1686 20.525 12.9814 20.7203C12.9678 20.7345 11.6063 22.1579 10.1225 23.943C9.41073 24.7987 8.72663 25.0503 8.16858 25.0503Z" fill="white" /><path d="M27.8771 21.2334C27.7829 21.2334 27.6877 21.2063 27.6037 21.1497C27.3794 20.9985 27.3202 20.6941 27.4713 20.4697C31.6823 14.2209 33.1664 6.67866 31.9047 5.0661C30.3164 3.03666 28.0732 1.97579 25.2375 1.91317C23.1399 1.86684 21.4618 2.40341 21.1859 2.49777C21.1629 2.5092 21.1387 2.51899 21.1134 2.52692C20.8166 2.62006 20.5882 2.45678 20.502 2.26573C20.4001 2.03984 20.4837 1.77262 20.6958 1.64438C20.879 1.53359 22.8068 0.907246 25.1151 0.93147C28.28 0.96507 30.8946 2.186 32.6761 4.46241C33.8782 5.9986 33.0848 9.73859 32.6879 11.2753C31.8346 14.5791 30.2293 18.1299 28.2837 21.0171C28.1891 21.1576 28.0344 21.2334 27.8771 21.2334Z" fill="white" /><path d="M28.0933 24.1303C27.3654 24.1304 26.7121 24.0275 26.3209 23.7932C25.9089 23.5464 25.8302 23.2091 25.8199 23.0301C25.713 21.1519 26.7185 20.7797 27.2762 20.6188C27.2053 20.5171 27.1119 20.4005 27.0158 20.2803C26.7019 19.8881 26.2719 19.3509 25.94 18.5462C25.8893 18.4231 25.7278 18.1336 25.5408 17.7984C24.5212 15.9698 22.3995 12.1648 23.7709 10.2045C24.4013 9.30334 25.6449 8.9423 27.4732 9.12823C27.23 8.40595 26.6208 7.0669 25.4958 5.73744C24.1901 4.19474 21.8767 2.34336 18.2692 2.28417C16.4385 2.25365 14.9355 2.81587 13.8071 3.95387C11.2778 6.50488 11.3636 11.1471 11.3647 11.1937C11.3715 11.464 11.1579 11.6888 10.8876 11.6957C10.6196 11.701 10.3926 11.4894 10.3854 11.2191C10.3799 11.0122 10.2845 6.11928 13.1081 3.26744C14.4319 1.93052 16.172 1.27154 18.2852 1.30466C22.2205 1.36919 24.7535 3.36968 26.1854 5.0365C27.746 6.85326 28.5116 8.86005 28.5747 9.53074C28.6253 10.0687 28.212 10.17 28.1647 10.1799L27.988 10.1838C26.7544 9.98628 25.1603 9.92688 24.5733 10.766C23.5536 12.2235 25.5455 15.7957 26.3961 17.3211C26.6147 17.7131 26.7726 17.9962 26.8453 18.1725C27.1239 18.8479 27.4879 19.3027 27.7803 19.6681C28.0405 19.9931 28.2661 20.275 28.3491 20.6098C28.3919 20.6792 28.9359 21.4197 32.0034 20.7866C32.8095 20.6199 33.2946 20.7669 33.4453 21.2226C33.7364 22.1032 32.1312 23.1171 31.2418 23.5301C30.4501 23.8978 29.1875 24.1303 28.0933 24.1303ZM26.7959 22.9356C26.915 23.0327 27.421 23.1905 28.4154 23.1441C29.3156 23.1018 30.2632 22.9046 30.8294 22.6418C31.488 22.336 31.9524 21.9953 32.2238 21.7417C32.2165 21.7431 32.2091 21.7446 32.2017 21.7461C30.1895 22.1615 28.7641 22.1045 27.9649 21.577C27.915 21.5441 27.8694 21.5105 27.8278 21.4766C27.7608 21.5 27.6914 21.5195 27.6203 21.5394C27.1677 21.6666 26.7399 21.7866 26.7959 22.9356Z" fill="white" /><path d="M13.8219 25.5205C13.3244 25.5205 12.8027 25.4535 12.2612 25.318C12.1057 25.2791 10.7418 24.9129 10.7599 24.041C10.7766 23.2429 11.9152 23.0082 12.3438 22.9198C13.8508 22.6096 13.9483 22.4858 14.4165 21.8915C14.5552 21.7153 14.7279 21.4961 14.9634 21.2329C15.7472 20.356 16.4863 20.6621 16.8019 20.7929C17.297 20.9981 17.7098 21.4931 17.8791 22.0848C18.0324 22.6202 17.9588 23.1363 17.672 23.5378C16.7402 24.8424 15.4047 25.5203 13.8219 25.5205ZM11.8453 24.0866C11.9874 24.1835 12.2296 24.3003 12.4988 24.3677C13.8057 24.6946 15.6258 24.7175 16.8747 22.9685C17.0228 22.7613 16.9775 22.4948 16.9373 22.3545C16.8522 22.0572 16.6423 21.7872 16.4269 21.6979C16.161 21.5878 16.0143 21.5272 15.6938 21.8857C15.6938 21.8858 15.6936 21.8859 15.6935 21.886C15.4784 22.1262 15.323 22.3235 15.186 22.4976C14.588 23.2566 14.3143 23.5142 12.5414 23.8793C12.1752 23.9548 11.964 24.0308 11.8453 24.0866Z" fill="white" /><path d="M15.2582 22.0284C15.0206 22.0284 14.8119 21.855 14.7747 21.6128C14.7647 21.5477 14.7577 21.4823 14.7534 21.4165C13.6021 21.3857 12.4936 20.8878 11.65 20.0076C10.5736 18.8846 10.0838 17.3289 10.3061 15.7395C10.5452 14.0291 10.4556 12.5189 10.4076 11.7075C10.3942 11.4809 10.3845 11.3171 10.3852 11.203C10.3863 11.0537 10.3889 10.6571 11.6797 10.0028C12.134 9.7725 13.0448 9.37075 14.0405 9.26769C15.7006 9.09525 16.7967 9.83648 17.1249 11.3537C18.0008 15.4044 17.1938 17.1973 16.6045 18.5065C16.4954 18.7489 16.3924 18.9778 16.3102 19.1989L16.2373 19.3948C15.9286 20.2222 15.662 20.9367 15.7429 21.4642C15.784 21.7316 15.6005 21.9816 15.3331 22.0226C15.3079 22.0265 15.2829 22.0284 15.2582 22.0284ZM11.3686 11.3456C11.3723 11.4276 11.3785 11.5312 11.3855 11.6495C11.4356 12.4949 11.5289 14.0684 11.2763 15.8752C11.0958 17.1656 11.4898 18.4248 12.3573 19.3298C13.0395 20.0416 13.9366 20.4356 14.8587 20.4383C14.9647 20.0033 15.1356 19.5452 15.3194 19.0523L15.3919 18.8578C15.4856 18.6057 15.5952 18.3621 15.7113 18.1043C16.2744 16.8532 16.9752 15.2962 16.1675 11.5607C16.0114 10.8391 15.6361 10.4196 15.02 10.2785C13.6702 9.96931 11.777 10.9836 11.3686 11.3456Z" fill="white" /><path d="M14.0644 11.1359C14.0418 11.2962 14.3578 11.7237 14.7698 11.7809C15.1812 11.8382 15.5332 11.5041 15.5555 11.344C15.5778 11.1837 15.2622 11.0073 14.85 10.9499C14.4385 10.8924 14.0862 10.9761 14.0644 11.1359Z" fill="white" /><path d="M14.8591 11.9503C14.8221 11.9503 14.7848 11.9479 14.7473 11.9427C14.4885 11.9067 14.2271 11.7437 14.0482 11.5066C13.9851 11.4228 13.8822 11.2604 13.9028 11.1135C13.9104 11.058 13.9389 10.9776 14.0306 10.9081C14.1939 10.7845 14.5166 10.7385 14.8726 10.7883C15.0915 10.8188 15.2949 10.8819 15.4454 10.966C15.7099 11.1138 15.7294 11.2804 15.7173 11.3666C15.6827 11.6145 15.2905 11.9503 14.8591 11.9503ZM14.2286 11.1669C14.2537 11.2764 14.4878 11.5769 14.7922 11.6192C15.0993 11.6614 15.3532 11.419 15.3904 11.3307C15.3549 11.2787 15.1663 11.1587 14.8275 11.1116C14.4937 11.0651 14.2804 11.1266 14.2286 11.1669Z" fill="white" /><path d="M26.5933 10.8092C26.6156 10.9695 26.3 11.397 25.8879 11.4541C25.4762 11.5115 25.1242 11.1773 25.1016 11.0173C25.0799 10.857 25.3956 10.6805 25.8073 10.6232C26.219 10.5659 26.571 10.6493 26.5934 10.8093L26.5933 10.8092Z" fill="white" /><path d="M25.7954 11.5422C25.3899 11.5422 25.0475 11.2184 25.0207 11.0288C24.9875 10.7849 25.3856 10.5995 25.7959 10.5424C26.2066 10.485 26.6402 10.5547 26.674 10.798H26.6741C26.6893 10.9074 26.6063 11.0757 26.4625 11.2267C26.3682 11.3257 26.1696 11.4976 25.899 11.5351C25.8642 11.5399 25.8295 11.5422 25.7954 11.5422ZM26.0625 10.6863C25.9891 10.6863 25.9076 10.6916 25.8186 10.7041C25.3886 10.764 25.1729 10.9351 25.1825 11.0064C25.1979 11.116 25.508 11.4239 25.8766 11.3734C26.0981 11.3426 26.2648 11.1978 26.3444 11.1142C26.4687 10.9835 26.5181 10.8618 26.5125 10.8205C26.5046 10.7643 26.3432 10.6863 26.0625 10.6863Z" fill="white" /><path d="M27.1866 20.0411C27.0929 20.0411 26.9983 20.0142 26.9145 19.9582C26.6897 19.8078 26.6296 19.5035 26.7801 19.2787C27.737 17.8496 27.5613 16.3873 27.3913 14.9732C27.3184 14.3664 27.243 13.7391 27.2626 13.1355C27.2823 12.5155 27.3611 12.0046 27.4372 11.5106C27.5269 10.9282 27.6116 10.378 27.5765 9.72667C27.5619 9.4565 27.769 9.22575 28.0392 9.21118C28.3093 9.1979 28.5401 9.40374 28.5547 9.6739C28.5952 10.4267 28.4987 11.0535 28.4054 11.6597C28.3338 12.1249 28.2596 12.6059 28.2417 13.1671C28.2246 13.6962 28.2922 14.2597 28.364 14.8563C28.5463 16.3734 28.753 18.093 27.5941 19.8238C27.4995 19.9649 27.3445 20.0411 27.1866 20.0411Z" fill="white" /></g><defs><clipPath id="clip0_213_1827"><rect width="35" height="35" fill="white" /></clipPath></defs></svg></div>
@@ -319,8 +350,8 @@ function App() {
             </div>
             <div className='flex flex-col gap-4'>
               <div className='font-PoppinsBold text-white text-3xl sm:text-4xl'>{t('Protótipos')}</div>
-              <div className='text-[#9C9C9C] leading-[30px]'>{t('Projetos de prototipagem e UI/UX, incluindo layouts de aplicativos, dashboards e telas interativas. Cada design pensado com atenção aos detalhes, levando em consideração as regras de negócio e focando em usabilidade, estética e eficiência.')}</div>
-              <div className='text-[#9C9C9C] leading-[30px]'>{t('Trabalho desde a concepção visual até a estruturação de interfaces que proporcionam experiências envolventes e intuitivas para o usuário.')}</div>
+              <div className='text-[#94A3B8] leading-[30px]'>{t('Projetos de prototipagem e UI/UX, incluindo layouts de aplicativos, dashboards e telas interativas. Cada design pensado com atenção aos detalhes, levando em consideração as regras de negócio e focando em usabilidade, estética e eficiência.')}</div>
+              <div className='text-[#94A3B8] leading-[30px]'>{t('Trabalho desde a concepção visual até a estruturação de interfaces que proporcionam experiências envolventes e intuitivas para o usuário.')}</div>
             </div>
             <div className='inline-flex h-[40px] gap-[20px]'>
               <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
@@ -347,7 +378,7 @@ function App() {
             </div>
             <div className='h-[-webkit-fill-available]'></div>
             <div className='flex flex-col gap-4'>
-              <div className='text-[#9C9C9C]'>{t('Desenvolvido com')}</div>
+              <div className='text-[#94A3B8]'>{t('Desenvolvido com')}</div>
               <div className='inline-flex gap-[20px]'>
                 <div className="tooltip-container">
                   <div className='inline-flex items-center justify-center p-[10px] rounded-[8px] bg-[#1C1E22] hover:scale-110 transition-all'><svg className='lg:w-[30px] lg:h-[30px] w-[25px] h-[25px]' viewBox="0 0 25 35" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_220_2462)"><path d="M12.8812 17.4999C12.8812 14.2782 15.5462 11.6665 18.8336 11.6665C22.121 11.6665 24.786 14.2783 24.786 17.4999C24.786 20.7216 22.121 23.3332 18.8336 23.3332C15.5461 23.3332 12.8812 20.7215 12.8812 17.4999Z" fill="#00BCFF" /><path d="M0.976685 29.1666C0.976685 25.945 3.64167 23.3333 6.92908 23.3333L10.1012 21.692L12.8815 23.3333V29.1666C12.8815 32.3883 10.2165 35 6.92908 35C3.64167 35 0.976685 32.3883 0.976685 29.1666Z" fill="#00CF7F" /><path d="M12.8813 0L9.64233 5.51459L12.8813 11.6667H18.7502C22.0377 11.6667 24.7026 9.05501 24.7026 5.83335C24.7026 2.61169 22.0376 0 18.7502 0H12.8813Z" fill="#FF7361" /><path d="M0.892822 5.83335C0.892822 9.05501 3.55781 11.6667 6.84522 11.6667L10.0028 12.8619L12.8811 11.6667V0H6.84515C3.55781 0 0.892822 2.61169 0.892822 5.83335Z" fill="#FF4D12" /><path d="M0.976685 17.4999C0.976685 20.7217 3.64167 23.3333 6.92908 23.3333H12.8815V11.6665H6.92908C3.64167 11.6665 0.976685 14.2783 0.976685 17.4999Z" fill="#B659FF" /></g><defs><clipPath id="clip0_220_2462"><rect width="25" height="35" fill="white" /></clipPath></defs></svg></div>
@@ -381,8 +412,8 @@ function App() {
             </div>
             <div className='flex flex-col gap-4'>
               <div className='font-PoppinsBold text-white text-3xl sm:text-4xl'>{t('Apontamento de hora extra')}</div>
-              <div className='text-[#9C9C9C] leading-[30px]'>{t('Aplicativo para apontamento de horas, gerenciamento de funcionários e tela destinada à pesquisa, contendo filtros e gráficos interativos e dinâmicos. Além disso, exportação para tabelas Excel.')}</div>
-              <div className='text-[#9C9C9C] leading-[30px]'>{t('Projeto freelance, desenvolvido em low-code utilizando PowerPlatform.')}</div>
+              <div className='text-[#94A3B8] leading-[30px]'>{t('Aplicativo para apontamento de horas, gerenciamento de funcionários e tela destinada à pesquisa, contendo filtros e gráficos interativos e dinâmicos. Além disso, exportação para tabelas Excel.')}</div>
+              <div className='text-[#94A3B8] leading-[30px]'>{t('Projeto freelance, desenvolvido em low-code utilizando PowerPlatform.')}</div>
             </div>
             <div className='inline-flex h-[40px] gap-[20px]'>
               <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
@@ -395,19 +426,27 @@ function App() {
             </div>
             <div className='h-[-webkit-fill-available]'></div>
             <div className='flex flex-col gap-4'>
-              <div className='text-[#9C9C9C]'>{t('Desenvolvido com')}</div>
+              <div className='text-[#94A3B8]'>{t('Desenvolvido com')}</div>
 
             </div>
           </div>
         </div>
         <div className='max-w-[88rem] mx-auto flex items-center pt-[2rem] md:pt-[3rem] gap-12 z-10 px-6'>
           <div className='flex flex-row w-full items-center gap-[20px] md:gap-[40px]'>
-            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]'></div>
+            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#002D3190] to-[#2D5CFF]'></div>
             <div className='flex flex-col min-w-fit items-center gap-1'>
-              <p className='text-[#2D5CFF]'>{t('Ferramentas')}</p>
-              <p className='text-[#9C9C9C] text-sm'>{t('É aqui que a mágica é feita')}</p>
+              <div className='font-PoppinsBold text-2xl sm:text-3xl' style={{
+                background: 'linear-gradient(135deg, #2D5CFF 0%, rgba(45, 49, 144, 0.8) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textFillColor: 'transparent',
+              }} >
+                {t('Ferramentas')}
+              </div>
+              <p className='text-[#94A3B8] text-sm'>{t('É aqui que a mágica é feita')}</p>
             </div>
-            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D5CFF] to-[#2D3190]'></div>
+            <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D5CFF] to-[#002D3190]'></div>
           </div>
         </div>
         <div className='relative max-w-[88rem] mx-auto flex flex-wrap items-center justify-center py-[4rem] md:py-[6rem] gap-2 -z-10 px-6 overflow-x-clip group'>
@@ -502,26 +541,26 @@ function App() {
             <div className='relative flex flex-col gap-[20px] flex-1 min-w-0'>
               <div className='flex flex-col bg-[#20212280] rounded-[16px] px-[40px] py-[30px] gap-[20px]'>
                 <p className='font-PoppinsBold text-white text-2xl sm:text-3xl'>{t('Sobre mim')}</p>
-                <div className={`text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>👋🏻️ Meu nome é <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> e sou <span className="font-PoppinsSemiBold text-white">desenvolvedor fullstack</span>, com 3 anos de experiência no mercado. Sou graduado em Engenharia de Software (UNICESUMAR) mas já atuo na área antes mesmo de me formar.</div>
-                <div className={`text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>👋🏻️ My name is <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> and I am a <span className="font-PoppinsSemiBold text-white">fullstack developer</span> with 3 years of experience in the market. I have a degree in Software Engineering (UNICESUMAR) but i have been working in the area even before graduating.</div>
-                <div className={`text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>🧑🏻‍💻 Atualmente, trabalho com Power Platform e UI/UX Design, desenvolvendo aplicativos com <span className="font-PoppinsSemiBold text-white">PowerApps</span>, automações com <span className="font-PoppinsSemiBold text-white">Power Automate</span> e prototipagens com <span className="font-PoppinsSemiBold text-white">Figma</span>.</div>
-                <div className={`text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>🧑🏻‍💻 I currently work with Power Platform and UI/UX Design, developing applications with <span className="font-PoppinsSemiBold text-white">PowerApps</span>, automations with <span className="font-PoppinsSemiBold text-white">Power Automate</span> and prototyping with <span className="font-PoppinsSemiBold text-white">Figma</span>.</div>
-                <div className={`text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>📚 Tenho estudado <span className="font-PoppinsSemiBold text-white">Java Spring Boot</span> e <span className="font-PoppinsSemiBold text-white">React</span>, desenvolvendo projetos independentes como o <span className="font-PoppinsSemiBold text-white">BarberShop</span> e alguns freelances como <span className="font-PoppinsSemiBold text-white">Apontamento de Hora Extra</span>, por exemplo.</div>
-                <div className={`text-[#9C9C9C] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>📚 I have been studying <span className="font-PoppinsSemiBold text-white">Java Spring Boot</span> and <span className="font-PoppinsSemiBold text-white">React</span>, developing independent projects such as <span className="font-PoppinsSemiBold text-white">BarberShop</span> and some freelance work such as <span className="font-PoppinsSemiBold text-white">Extra hours report</span>, por example.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>👋🏻️ Meu nome é <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> e sou <span className="font-PoppinsSemiBold text-white">desenvolvedor fullstack</span>, com 3 anos de experiência no mercado. Sou graduado em Engenharia de Software (UNICESUMAR) mas já atuo na área antes mesmo de me formar.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>👋🏻️ My name is <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> and I am a <span className="font-PoppinsSemiBold text-white">fullstack developer</span> with 3 years of experience in the market. I have a degree in Software Engineering (UNICESUMAR) but i have been working in the area even before graduating.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>🧑🏻‍💻 Atualmente, trabalho com Power Platform e UI/UX Design, desenvolvendo aplicativos com <span className="font-PoppinsSemiBold text-white">PowerApps</span>, automações com <span className="font-PoppinsSemiBold text-white">Power Automate</span> e prototipagens com <span className="font-PoppinsSemiBold text-white">Figma</span>.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>🧑🏻‍💻 I currently work with Power Platform and UI/UX Design, developing applications with <span className="font-PoppinsSemiBold text-white">PowerApps</span>, automations with <span className="font-PoppinsSemiBold text-white">Power Automate</span> and prototyping with <span className="font-PoppinsSemiBold text-white">Figma</span>.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>📚 Tenho estudado <span className="font-PoppinsSemiBold text-white">Java Spring Boot</span> e <span className="font-PoppinsSemiBold text-white">React</span>, desenvolvendo projetos independentes como o <span className="font-PoppinsSemiBold text-white">BarberShop</span> e alguns freelances como <span className="font-PoppinsSemiBold text-white">Apontamento de Hora Extra</span>, por exemplo.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>📚 I have been studying <span className="font-PoppinsSemiBold text-white">Java Spring Boot</span> and <span className="font-PoppinsSemiBold text-white">React</span>, developing independent projects such as <span className="font-PoppinsSemiBold text-white">BarberShop</span> and some freelance work such as <span className="font-PoppinsSemiBold text-white">Extra hours report</span>, por example.</div>
               </div>
               <div className='flex flex-col bg-[#20212280] backdrop-blur-[2px] rounded-[16px] px-[40px] py-[30px] gap-[20px] z-10'>
                 <p className='font-PoppinsBold text-white text-2xl sm:text-3xl'>{t('Principais destaques')}</p>
                 <div className='flex flex-col gap-1'>
                   <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {t('Desenvolvimento de aplicações em low-code')}</div>
-                  <div className='text-[#9C9C9C] leading-[30px] text-sm ml-5'>{t('Controle de eventos integrado ao outlook, visão de calendário e criação de eventos recorrentes; ')}<br />{t('Gestão e relatório de status de vendas, com dashboard interativo de produção de vendedores, gestão de metas e reportes semanais/mensais;')}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Controle de eventos integrado ao outlook, visão de calendário e criação de eventos recorrentes; ')}<br />{t('Gestão e relatório de status de vendas, com dashboard interativo de produção de vendedores, gestão de metas e reportes semanais/mensais;')}</div>
                 </div>
                 <div className='flex flex-col gap-1'>
                   <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {t('Automação de processos empresariais')}</div>
-                  <div className='text-[#9C9C9C] leading-[30px] text-sm ml-5'>{t('Bancos: redução de mais de 70% do tempo gasto em tarefas diárias;')} <br />{t('IPTU: automação completa do processo de emissão;')}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Bancos: redução de mais de 70% do tempo gasto em tarefas diárias;')} <br />{t('IPTU: automação completa do processo de emissão;')}</div>
                 </div>
                 <div className='flex flex-col gap-1'>
                   <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {t('Prototipagem e UI/UX')}</div>
-                  <div className='text-[#9C9C9C] leading-[30px] text-sm ml-5'>{t('Criando e refatorando interfaces para melhorar a experiência do cliente.')}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Criando e refatorando interfaces para melhorar a experiência do cliente.')}</div>
                 </div>
               </div>
               <svg className="absolute lg:right-[-85px] right-[-15px] lg:bottom-[-25px] bottom-[-55px] w-[35vw] lg:max-w-[200px] max-w-[130px] -z-10" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="99.5" transform="rotate(180 100 100)" stroke="#2D5CFF" strokeDasharray="10 10" /></svg>
@@ -555,33 +594,13 @@ function App() {
             </div>
             <div className='h-[1px] w-full bg-[#202122]'></div>
             <div className='flex w-full sm:justify-start justify-center'>
-              <p className='text-[#707070] sm:w-[-webkit-fill-available]'>© 2025 {t('Desenvolvido por')} <span className='text-[#2D5CFF]'>Dudu</span>.</p>
-              <p className='text-[#707070] sm:flex hidden min-w-fit'>{t('Você faz a diferença.')}</p>
+              <p className='text-[#707070] sm:w-[-webkit-fill-available] text-sm'>{t('Desenvolvido por')} <span className='text-[#2D5CFF]'>Dudu</span>.</p>
+              <p className='text-[#707070] sm:flex hidden min-w-fit text-sm'>© 2025 dudu-portfolio.com</p>
             </div>
             <svg className='absolute top-0 max-h-[212px] -z-10' viewBox="0 0 1402 212" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0L701 0L1402 0V212H0L0 0Z" fill="url(#paint0_radial_371_602)" fillOpacity="0.1" /><defs><radialGradient id="paint0_radial_371_602" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(701 -5.05447e-05) rotate(90) scale(212 701)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.6" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
           </div>
         </div>
       </div>
-      {/* <svg className="bgelement absolute inset-0 w-[50vw] max-w-[437.5px] h-auto" viewBox="0 0 438 953" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="-437" y="-437" width="875" height="1390" rx="437.5" fill="url(#paint0_radial_186_1100)" fillOpacity="0.4" />
-        <defs>
-          <radialGradient id="paint0_radial_186_1100" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0.5 258) rotate(90) scale(695 437.5)">
-            <stop stopColor="#2D5CFF" stopOpacity="0.65" />
-            <stop offset="0.6" stopColor="#2D3190" stopOpacity="0.4" />
-            <stop offset="1" stopColor="#2D3190" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-      </svg>
-      <svg className="bgelement absolute right-0 top-[305px] w-[50vw] max-w-[437.5px] h-auto" viewBox="0 0 438 1199" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="875" height="1199" rx="437.5" fill="url(#paint0_radial_199_702)" fillOpacity="0.4" />
-        <defs>
-          <radialGradient id="paint0_radial_199_702" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(437.5 599.5) rotate(90) scale(599.5 437.5)">
-            <stop stopColor="#2D5CFF" stopOpacity="0.65" />
-            <stop offset="0.6" stopColor="#2D3190" stopOpacity="0.4" />
-            <stop offset="1" stopColor="#2D3190" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-      </svg> */}
     </div>
   );
 }
