@@ -100,3 +100,8 @@ body {
     font-size: 14px;
   }
 }
+
+::selection {
+  background-color: #2842CC;
+  color: white;
+}
