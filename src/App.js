@@ -182,7 +182,7 @@ function App() {
             </div>
           </div>
         </header>
-        <header className='sidebar fixed backdrop-blur-[30px] shadow-[0px_0px_30px_rgba(227,228,237,0.05)] bg-[rgba(255,255,255,0.01)] border-l-[1px] border-[#ffffff0D] top-0 right-0 h-[100vh] max-w-[300px] mx-auto hidden flex-col w-full px-6 py-[20px] gap-[50px] z-[99]'>
+        <header className='sidebar fixed backdrop-blur-[30px] shadow-[0px_0px_30px_rgba(227,228,237,0.05)] bg-[rgba(255,255,255,0.01)] border-l-[1px] border-[#ffffff0D] top-0 right-0 h-[100dvh] max-w-[300px] mx-auto hidden flex-col w-full px-6 py-[20px] gap-[50px] z-[99]'>
           <div className='flex flex-row items-center justify-start w-full gap-2'>
             <p className='text-white w-[-webkit-fill-available] leading-[28px]'>Menu</p>
             <button onClick={() => hideSidebar()} className='cursor-pointer'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
@@ -280,8 +280,8 @@ function App() {
             <div className='md:w-full md:max-w-[594px] w-[73vw] aspect-square inline-flex justify-center items-center bg-[#20212266] rounded-[16px] backdrop-blur-[4px] overflow-visible'>
               <img src={barbershop_showcase} className='max-w-none md:h-full h-[73vw] md:absolute object-cover' alt='barbershop_mobile_app_showcase'></img>
             </div>
-            <svg className='absolute max-w-[100%] max-h-[100%] md:right-[-180px] bottom-[-120px] md:bottom-0 -z-10' viewBox="0 0 650 650" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 325C0 145.507 147.375 0 326.868 0C504.309 0 650 143.844 650 321.286V325C650 504.492 504.493 650 325 650C145.507 650 0 504.493 0 325Z" fill="url(#paint0_radial_228_5286)" fillOpacity="0.6" /><defs><radialGradient id="paint0_radial_228_5286" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(325 325) rotate(90) scale(325 325)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.5" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
-            <svg className='absolute md:top-[-80px] md:left-[-80px] top-[-75px] left-0 w-[35vw] md:max-w-[200px] max-w-[130px] -z-10' height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="99.5" transform="rotate(180 100 100)" stroke="#2D5CFF" strokeDasharray="10 10" /></svg>
+            <div className="bg-blurred-circle absolute left-[40%] w-[650px] h-[650px] rounded-full pointer-events-none z-[-10]" />
+            <BgDottedCircle top="-12%" left="-8%" degrees={135} />
           </div>
           <div className='w-[-webkit-fill-available] h-[-webkit-fill-available] flex flex-col px-[10px] py-[20px] gap-[30px] z-10'>
             <div className='flex gap-[10px]'>
@@ -344,8 +344,8 @@ function App() {
             <div className='md:w-full md:max-w-[594px] w-[73vw] aspect-square inline-flex justify-center items-center bg-[#20212266] rounded-[16px] backdrop-blur-[4px] overflow-visible'>
               <img src={prototypes_showcase} className='max-w-none md:h-full h-[73vw] md:absolute object-cover' alt='barbershop_mobile_app_showcase'></img>
             </div>
-            <svg className='absolute max-w-[100%] max-h-[100%] md:right-[-180px] bottom-[-120px] md:bottom-0 -z-10' viewBox="0 0 650 650" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 325C0 145.507 147.375 0 326.868 0C504.309 0 650 143.844 650 321.286V325C650 504.492 504.493 650 325 650C145.507 650 0 504.493 0 325Z" fill="url(#paint0_radial_228_5286)" fillOpacity="0.6" /><defs><radialGradient id="paint0_radial_228_5286" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(325 325) rotate(90) scale(325 325)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.5" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
-            <svg className='absolute md:top-[-80px] md:left-[-80px] top-[-75px] left-0 w-[35vw] md:max-w-[200px] max-w-[130px] -z-10' height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="99.5" transform="rotate(180 100 100)" stroke="#2D5CFF" strokeDasharray="10 10" /></svg>
+            <div className="bg-blurred-circle absolute left-[40%] w-[650px] h-[650px] rounded-full pointer-events-none z-[-10]" />
+            <BgDottedCircle top="-12%" left="-8%" degrees={135} />
           </div>
           <div className='w-[-webkit-fill-available] h-[-webkit-fill-available] flex flex-col px-[10px] py-[20px] gap-[30px] z-10'>
             <div className='flex gap-[10px]'>
@@ -406,8 +406,8 @@ function App() {
             <div className='md:w-full md:max-w-[594px] w-[73vw] aspect-square inline-flex justify-center items-center bg-[#20212266] rounded-[16px] backdrop-blur-[4px] overflow-visible'>
               <img src={timesheet_showcase} className='max-w-none md:h-full h-[73vw] md:absolute object-cover' alt='barbershop_mobile_app_showcase'></img>
             </div>
-            <svg className='absolute max-w-[100%] max-h-[100%] md:right-[-180px] bottom-[-120px] md:bottom-0 -z-10' viewBox="0 0 650 650" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 325C0 145.507 147.375 0 326.868 0C504.309 0 650 143.844 650 321.286V325C650 504.492 504.493 650 325 650C145.507 650 0 504.493 0 325Z" fill="url(#paint0_radial_228_5286)" fillOpacity="0.6" /><defs><radialGradient id="paint0_radial_228_5286" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(325 325) rotate(90) scale(325 325)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.5" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
-            <svg className='absolute md:top-[-80px] md:left-[-80px] top-[-75px] left-0 w-[35vw] md:max-w-[200px] max-w-[130px] -z-10' height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="99.5" transform="rotate(180 100 100)" stroke="#2D5CFF" strokeDasharray="10 10" /></svg>
+            <div className="bg-blurred-circle absolute left-[40%] w-[650px] h-[650px] rounded-full pointer-events-none z-[-10]" />
+            <BgDottedCircle top="-12%" left="-8%" degrees={135} />
           </div>
           <div className='w-[-webkit-fill-available] h-[-webkit-fill-available] flex flex-col px-[10px] py-[20px] gap-[30px] z-10'>
             <div className='flex gap-[10px]'>
