@@ -144,6 +144,33 @@ function App() {
     };
   }, []);
 
+  const projects = [
+    {
+      id: 1,
+      title: "Aplicativo mobile para controle e gestão de barbearias",
+      tags: ["Mobile App", "UX/UI", "Fullstack", "Design System"],
+      img: ""
+    },
+    {
+      id: 2,
+      title: "Aplicativo mobile para postagem e candidaturas de vagas",
+      tags: ["Mobile App", "UX/UI"],
+      img: ""
+    },
+    {
+      id: 3,
+      title: "Aplicativo para controle e gestão de deliverys B2B",
+      tags: ["Web App", "B2B", "UX/UI", "Design System"],
+      img: ""
+    },
+    {
+      id: 4,
+      title: "Site para empresa PARLAK",
+      tags: ["Website", "UX/UI", "Responsive"],
+      img: ""
+    },
+  ]
+
   return (
     <div className='bg-[#101216] min-h-screen overflow-x-clip'>
       <div className="relative z-10">
@@ -275,6 +302,47 @@ function App() {
             <div className='h-[1px] max-h-[1px] w-full bg-gradient-to-r from-[#2D5CFF] to-[#002D3190]'></div>
           </div>
         </div>
+
+        <div className='body max-w-[88rem] mx-auto flex flex-col md:flex-row items-center pt-[3rem] md:pt-[8rem] pb-[3rem] md:pb-[8rem] md:gap-12 gap-[10px] z-10 px-6'>
+          <div className='relative grid grid-cols-3 gap-[3rem] w-full h-auto'>
+            <BgDottedCircle top="-8%" left="-6%" degrees={135} />
+            {projects?.map((projectItem, index) => {
+              return (
+                <div key={index} className="flex flex-col gap-[1rem]">
+                  <div className="w-full aspect-square bg-[#181C20] rounded-[16px] border-[1px] border-[#ffffff0D] hover:border-[#2D5CFF] shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] hover:shadow-[0_0px_60px_0_rgba(45,92,255,0.5)] duration-300 ease-in-out hover:scale-105 cursor-pointer"></div>
+                  <div className="flex flex-row gap-[10px]">
+                    {projectItem.tags?.map((tag, index) => {
+                      return (
+                        <div key={index} className={`font-PoppinsBold text-white text-[12px] flex justify-center px-[12px] py-[6px] rounded-[4px] ${index === 0 ? "bg-gradient-to-r from-[#2D5CFF] to-[#2D3190]" : "bg-[#1C1E22]"}`}>
+                          {tag.toUpperCase()}
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <div className="text-lg text-white font-PoppinsSemiBold">{projectItem.title}</div>
+                </div>
+              )
+            })}
+            <div className="flex flex-col gap-[1.5rem] items-center justify-center w-full aspect-square rounded-[16px]" style={{
+              backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3e%3cstop offset='0%25' style='stop-color:rgba(45,92,255, 0.8)' /%3e%3cstop offset='100%25' style='stop-color:rgba(45,49,144, 0.8)' /%3e%3c/linearGradient%3e%3c/defs%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='url(%23g)' stroke-width='3' stroke-dasharray='10, 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")`,
+            }}>
+              <div className='flex items-center justify-center p-[1px] min-w-[64px] h-[64px] rounded-full max-w-fit bg-[#1C1E22]' style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3e%3cstop offset='0%25' style='stop-color:rgba(45,92,255, 0.8)' /%3e%3cstop offset='100%25' style='stop-color:rgba(45,49,144, 0.8)' /%3e%3c/linearGradient%3e%3c/defs%3e%3crect width='100%25' height='100%25' fill='none' rx='999' ry='999' stroke='url(%23g)' stroke-width='3' stroke-dasharray='8, 10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")`,
+              }}>
+                <svg width="24" height="30" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.50684 11.8725L7.10144 5.658C10.0715 1.6395 11.5565 -0.367496 12.9381 0.0555041C14.3241 0.478504 14.3241 2.9445 14.3241 7.872V8.3355C14.3241 10.113 14.3241 10.9995 14.8911 11.5575L14.9226 11.5845C15.5031 12.129 16.4257 12.129 18.2752 12.129C21.6053 12.129 23.2658 12.129 23.8283 13.137C23.8373 13.155 23.8463 13.1685 23.8553 13.1865C24.3863 14.2125 23.4233 15.5175 21.4973 18.123L16.9027 24.342C13.9326 28.3605 12.4476 30.3675 11.0615 29.9445C9.6755 29.5215 9.6755 27.0555 9.6755 22.128V21.6645C9.6755 19.887 9.6755 19.0005 9.10848 18.4425L9.07698 18.4155C8.49647 17.871 7.57395 17.871 5.72441 17.871C2.39433 17.871 0.733796 17.871 0.171283 16.863C0.162283 16.845 0.153282 16.8315 0.144282 16.8135C-0.38673 15.783 0.580792 14.478 2.50684 11.8725Z" fill="url(#paint0_linear_637_673)" /><defs><linearGradient id="paint0_linear_637_673" x1="0" y1="15" x2="24" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#2D5CFF" /><stop offset="1" stop-color="#2D3190" /></linearGradient></defs></svg>
+              </div>
+              <div className="text-lg text-white">Aqui pode ser seu projeto!</div>
+              <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
+                <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
+                <a href='https://barbershop-frontend-three.vercel.app/' target="_blank" rel="noopener noreferrer" className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]'>
+                  <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
+                  {t('Contato')}
+                </a>
+              </div>
+            </div>
+          </div >
+        </div>
+
         <div className='body max-w-[88rem] mx-auto md:h-[850px] flex flex-col md:flex-row items-center pt-[3rem] md:pt-[8rem] pb-[3rem] md:pb-[8rem] md:gap-12 gap-[10px] z-10 px-6'>
           <div className='relative w-[-webkit-fill-available] md:h-[-webkit-fill-available] inline-flex flex-col justify-center items-center'>
             <div className='md:w-full md:max-w-[594px] w-[73vw] aspect-square inline-flex justify-center items-center bg-[#20212266] rounded-[16px] backdrop-blur-[4px] overflow-visible'>
