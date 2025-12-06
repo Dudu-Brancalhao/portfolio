@@ -34,8 +34,12 @@ export default {
         'Prototipagem e UI/UX': 'Prototyping and UI/UX',
         'Criando e refatorando interfaces para melhorar a experiência do cliente.': 'Creating and refactoring interfaces to improve the customer experience.',
         'Desenvolvido por': 'Developed by',
-        'Você faz a diferença.': 'You make the difference.',
         'Sistema de Delivery (B2B)': 'Delivery System (B2B)',
         'Interface de Arquivos': 'Files Interface',
+        'Aqui pode ser seu projeto!': 'This could be your project!',
+        'Aplicativo mobile para controle e gestão de barbearias': 'Mobile application for controlling and managing barbershops',
+        'Aplicativo mobile para postagem e candidaturas de vagas': 'Mobile application for posting and applying for jobs',
+        'Aplicativo para controle e gestão de delivery B2B': 'Application for B2B delivery control and management',
+        'Site para empresa PARLAK': 'Application for B2B delivery control and management',
     }
 }

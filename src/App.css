@@ -33,10 +33,6 @@ body {
   background: radial-gradient(50% 50% at 50% 50%, rgba(45, 92, 255, 0.20) 0%, rgba(45, 49, 144, 0.12) 60%, rgba(45, 49, 144, 0.004) 100%);
 }
 
-.bgelement {
-  display: none;
-}
-
 .tooltip-container {
   position: relative;
   display: inline-block;
