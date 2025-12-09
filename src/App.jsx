@@ -15,8 +15,8 @@ import intellij_logo from './midia/intellij_logo.png';
 import postman_logo from './midia/postman_logo.png';
 import dudu_portrait from './midia/Dudu_portrait_2.png';
 import BgDottedCircle from './dotted-circle.jsx';
-import './i18n';
-import Modal from './components/Modal.jsx';
+import './i18n/index.js';
+import Modal from './components/Modal.tsx';
 import { useTranslation } from 'react-i18next';
 import './App.css';
 
@@ -516,7 +516,7 @@ function App() {
             show={!!selectedProject}
             onClose={closeModal}
             title={selectedProject ? t(selectedProject.title) : ''}
-            size="extra-large"
+            size="fullscreen"
           >
             {selectedProject && (
               <div className="flex flex-col gap-4 text-white">
