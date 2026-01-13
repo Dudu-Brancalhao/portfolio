@@ -66,13 +66,16 @@ const Modal: React.FC<ModalProps> = ({
             <span className="flex justify-center items-center h-6 w-6 text-2xl block outline-none focus:outline-none text-white hover:text-gray-500">×</span>
           </button>
         </div>
-        <div className={`relative grid grid-cols-[440px_1fr] w-full bg-[#101216] border-0 shadow-lg ${isFullscreen ? 'h-full' : 'rounded-lg'}`}>
-          <div className="overflow-y-auto custom-scrollbar items-start justify-between flex-shrink-0">
-            {description}
+        <div className={`relative w-full bg-[#101216] border-0 shadow-lg overflow-y-auto custom-scrollbar ${isFullscreen ? 'h-full' : 'rounded-lg max-h-[90vh]'}`}>
+          <div className="flex flex-col lg:grid lg:grid-cols-[440px_1fr] w-full lg:h-full">
+            <div className="lg:overflow-y-auto items-start justify-between flex-shrink-0 custom-scrollbar">
+              {description}
+            </div>
+
+            <div className="lg:overflow-y-auto custom-scrollbar">
+              {gallery}
+            </div>
           </div>
-
-          {gallery}
-
         </div>
       </div>
     </div>

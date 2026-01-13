@@ -6,11 +6,12 @@ import logo from './logo.svg';
 import dudu_photo from './midia/Dudu_photo.png';
 import barbershop_thumb from './midia/barbershop_thumb.png';
 import { login, bookings, gallery, homeServices, professionals, schedule, confirmationModal, scheduleSettings, scheduleSettingsModal } from './midia/app_barbershop';
+import { login_hub4you, applyModal, brandManual, company, emptyNotifications, home, newPostModal, notifications, profile, fullProfile } from './midia/app_hub4you';
+import { loginB2B, chatModal, dashboardB2B, delivery, detailsModal, employees, history, homeEmployeeMobile, mapEmployeeMobile, loginB2BMobile, registerB2BMobile, newDeliveryModalMobile, profileEmployeeMobile } from './midia/app_b2b';
+import parlakLandingPage from './midia/parlak/parlak_landing_page.png';
 import b2b_thumb from './midia/b2b_thumb.png';
 import hub4you_thumb from './midia/hub4you_thumb.png';
 import parlak_thumb from './midia/parlak_thumb.png';
-import prototypes_showcase from './midia/Prototypes_showcase.png';
-import timesheet_showcase from './midia/Timesheet_showcase.png';
 import intellij_logo from './midia/intellij_logo.png';
 import postman_logo from './midia/postman_logo.png';
 import dudu_portrait from './midia/Dudu_portrait_2.png';
@@ -183,15 +184,15 @@ function App() {
           <TechIcon {...stackIcons.java} />
         </ul>,
       gallery: [
-        { alt: "Login Screen", image: login },
-        { alt: "Home/Services Screen", image: homeServices },
-        { alt: "Gallery", image: gallery },
-        { alt: "Professionals Modal", image: professionals },
-        { alt: "Scheduling Screen", image: schedule },
-        { alt: "Success Modal", image: confirmationModal },
-        { alt: "Booking Screen", image: bookings },
-        { alt: "Schedule Settings", image: scheduleSettings },
-        { alt: "Modal Schedule Settings", image: scheduleSettingsModal },
+        { alt: "Login Screen", image: login, device: "mobile" },
+        { alt: "Home/Services Screen", image: homeServices, device: "mobile" },
+        { alt: "Gallery", image: gallery, device: "mobile" },
+        { alt: "Professionals Modal", image: professionals, device: "mobile" },
+        { alt: "Scheduling Screen", image: schedule, device: "mobile" },
+        { alt: "Success Modal", image: confirmationModal, device: "mobile" },
+        { alt: "Booking Screen", image: bookings, device: "mobile" },
+        { alt: "Schedule Settings", image: scheduleSettings, device: "mobile" },
+        { alt: "Modal Schedule Settings", image: scheduleSettingsModal, device: "mobile" },
       ]
     },
     {
@@ -199,42 +200,69 @@ function App() {
       title: "Aplicativo mobile para postagem e candidaturas de vagas",
       tags: ["Mobile App", "UX/UI"],
       img: hub4you_thumb,
-      showcaseImg: prototypes_showcase,
-      overview: "Um aplicativo focado em conectar profissionais a oportunidades de emprego. A interface foi desenhada para ser intuitiva, facilitando a busca por vagas e o processo de candidatura.",
-      functionalities: "Um aplicativo focado em conectar profissionais a oportunidades de emprego. A interface foi desenhada para ser intuitiva, facilitando a busca por vagas e o processo de candidatura.",
-      myFunction: "Um aplicativo focado em conectar profissionais a oportunidades de emprego. A interface foi desenhada para ser intuitiva, facilitando a busca por vagas e o processo de candidatura.",
+      overview: "Este é um aplicativo mobile de recrutamento voltado para profissionais com mais de 30 anos, conectando empresas e candidatos qualificados. A plataforma oferece um sistema inteligente de compatibilidade que analisa o perfil dos usuários e sugere as melhores oportunidades, criando um processo de candidatura mais assertivo e personalizado.",
+      functionalities: "Feed de Vagas, Sistema de Compatibilidade Inteligente, Perfil Profissional Completo, Candidatura Simplificada, Sistema de Notificações, Diretório de Empresas, Publicação de Vagas (Empresas).",
+      myFunction: "Atuei como UI/UX Designer responsável por todo o processo de design do aplicativo. Apliquei técnicas e boas práticas consolidadas no mercado de design. Desenvolvi a arquitetura completa, definindo fluxos de navegação e jornadas dos usuários. Criei protótipos interativos de alta fidelidade e todo o design system no Figma, incluindo componentes, padrões de interface e guidelines de usabilidade",
       stackTools:
         <ul className="flex flex-row">
           <TechIcon {...stackIcons.figma} />
-        </ul>
+        </ul>,
+      gallery: [
+        { alt: "Login Screen", image: login_hub4you, device: "mobile" },
+        { alt: "Feed", image: home, device: "mobile" },
+        { alt: "Apply Modal", image: applyModal, device: "mobile" },
+        { alt: "New Post Modal", image: newPostModal, device: "mobile" },
+        { alt: "Companies Screen", image: company, device: "mobile" },
+        { alt: "Notifications Screen", image: emptyNotifications, device: "mobile" },
+        { alt: "Notifications Screen", image: notifications, device: "mobile" },
+        { alt: "Profile", image: profile, device: "mobile" },
+        { alt: "Profile", image: fullProfile, device: "mobile" },
+        { alt: "Brand Manual", image: brandManual, device: "mobile" },
+      ]
     },
     {
       id: 3,
       title: "Aplicativo para controle e gestão de delivery B2B",
       tags: ["Web App", "B2B", "UX/UI", "Design System"],
       img: b2b_thumb,
-      showcaseImg: timesheet_showcase,
-      overview: "Uma solução web B2B para otimizar a logística de delivery. O sistema conta com um design system para manter a coesão entre as diferentes telas e funcionalidades, focando na eficiência operacional.",
-      functionalities: "Uma solução web B2B para otimizar a logística de delivery. O sistema conta com um design system para manter a coesão entre as diferentes telas e funcionalidades, focando na eficiência operacional.",
-      myFunction: "Uma solução web B2B para otimizar a logística de delivery. O sistema conta com um design system para manter a coesão entre as diferentes telas e funcionalidades, focando na eficiência operacional.",
+      overview: "Este é um sistema B2B de gestão de entregas composto por duas aplicações integradas: uma plataforma web administrativa e um aplicativo mobile para entregadores. A solução permite que empresas gerenciem todo o fluxo de entregas de forma centralizada, enquanto os entregadores recebem e executam as rotas em tempo real através do aplicativo mobile com integração de mapas.",
+      functionalities: "Dashboard Administrativo (Web), Gestão de Entregas, Rastreamento em Tempo Real, Sistema de Pontos e Gamificação (Mobile), Gerenciamento de Entregadores, Detalhes Completos do Pedido, Lista de Entregas Disponíveis (Mobile).",
+      myFunction: "Atuei como UI/UX Designer responsável pelo design completo das duas plataformas (web e mobile). Apliquei metodologias e boas práticas de mercado. Desenvolvi toda a arquitetura de informação, definindo fluxos de navegação distintos para administradores e entregadores. Criei protótipos interativos e o design system completo no Figma, incluindo componentes reutilizáveis, padrões de interface, iconografia e guidelines de consistência visual.",
       stackTools:
         <ul className="flex flex-row">
           <TechIcon {...stackIcons.figma} />
-        </ul>
+        </ul>,
+      gallery: [
+        { alt: "Login Screen", image: loginB2B, device: "web" },
+        { alt: "Dashboard", image: dashboardB2B, device: "web" },
+        { alt: "Delivery Screen", image: delivery, device: "web" },
+        { alt: "Details Modal", image: detailsModal, device: "web" },
+        { alt: "Chat Modal", image: chatModal, device: "web" },
+        { alt: "Employees", image: employees, device: "web" },
+        { alt: "History", image: history, device: "web" },
+        { alt: "Login Screen", image: loginB2BMobile, device: "mobile" },
+        { alt: "Register", image: registerB2BMobile, device: "mobile" },
+        { alt: "Home Employee Side", image: homeEmployeeMobile, device: "mobile" },
+        { alt: "Map Employee Side", image: mapEmployeeMobile, device: "mobile" },
+        { alt: "New Delivery Modal", image: newDeliveryModalMobile, device: "mobile" },
+        { alt: "Profile Employee", image: profileEmployeeMobile, device: "mobile" },
+      ]
     },
     {
       id: 4,
-      title: "Site para empresa PARLAK",
+      title: "Landing page responsiva para empresa PARLAK",
       tags: ["Website", "UX/UI", "Responsive"],
       img: parlak_thumb,
-      showcaseImg: parlak_thumb, // Using thumb as showcase for this one
-      overview: "Desenvolvimento do website institucional para a empresa PARLAK, com foco em um design responsivo e uma navegação clara para apresentar os serviços e a história da empresa.",
-      functionalities: "Desenvolvimento do website institucional para a empresa PARLAK, com foco em um design responsivo e uma navegação clara para apresentar os serviços e a história da empresa.",
-      myFunction: "Desenvolvimento do website institucional para a empresa PARLAK, com foco em um design responsivo e uma navegação clara para apresentar os serviços e a história da empresa.",
+      overview: "Esta é uma landing page institucional desenvolvida para a Parlak, empresa especializada em automação comercial e soluções digitais. O projeto apresenta um design moderno com elementos 3D isométricos, esquema de cores vibrante em tons de azul, e uma narrativa visual que comunica efetivamente os serviços e diferenciais da empresa. A página foi projetada para converter visitantes em leads.",
+      functionalities: "Hero Section Impactante, Apresentação de Serviços, Showcases de Produtos, Seção de Credibilidade, Múltiplos CTAs, Design System Consistente.",
+      myFunction: "Atuei como UI/UX Designer responsável por todo o design da landing page no Figma. Desenvolvi o conceito visual completo, incluindo a escolha da paleta de cores dark com acentos em azul e verde, criação e seleção de ilustrações 3D isométricas. Garanti que o design fosse responsivo e otimizado para conversão, aplicando princípios de UX writing nas headlines e microtextos.",
       stackTools:
         <ul className="flex flex-row">
           <TechIcon {...stackIcons.figma} />
-        </ul>
+        </ul>,
+      gallery: [
+        { alt: "Parlak Landing Page", image: parlakLandingPage, device: "web" }
+      ]
     },
   ]
 
@@ -295,7 +323,7 @@ function App() {
         </header>
         <div id='home' className='body max-w-[88rem] mx-auto md:h-[850px] flex flex-col-reverse md:flex-row items-center pt-[1rem] md:pt-[8rem] pb-[1rem] md:pb-[8rem] gap-12 z-10 px-6'>
           <div className='relative w-full h-full flex flex-col gap-10 md:text-left sm:pt-20'>
-            <BgDottedCircle top="0px" left="-12%" degrees={135} />
+            <BgDottedCircle className="top-[0px] left-[-12%] md:h-[200px] md:w-[200px]" degrees={135} />
             <div className='flex flex-col gap-4'>
               <div className="animate line font-PoppinsLight text-white text-lg">{t('Olá 👋🏻, eu sou')}</div>
               <div className='animate line font-PoppinsBold text-white text-3xl sm:text-5xl'>Eduardo Brancalhão</div>
@@ -314,10 +342,10 @@ function App() {
                 </div>
               </div>
               <div className={`animate line text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>
-                Sou um desenvolvedor fullstack com três anos de experiência, possuo conhecimento em <span className="font-PoppinsSemiBold text-white">Java</span>, <span className="font-PoppinsSemiBold text-white">Spring Boot</span> e <span className="font-PoppinsSemiBold text-white">React</span>. Atualmente trabalho com <span className="font-PoppinsSemiBold text-white">Power Platform</span>, <span className="font-PoppinsSemiBold text-white">Power Apps</span> e <span className="font-PoppinsSemiBold text-white">Power Automate</span>
+                Sou desenvolvedor fullstack com três anos de experiência especializado em <span className="font-PoppinsSemiBold text-white">React</span>. Tenho expertise em construção de <span className="font-PoppinsSemiBold text-white">design systems</span>, <span className="font-PoppinsSemiBold text-white">arquitetura de sistemas</span> e desenvolvimento de aplicações completas do zero.
               </div>
               <div className={`animate line text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>
-                I am a fullstack developer with three years of experience, I have knowledge in <span className="font-PoppinsSemiBold text-white">Java</span>, <span className="font-PoppinsSemiBold text-white">Spring Boot</span> and <span className="font-PoppinsSemiBold text-white">React</span>. I currently work with <span className="font-PoppinsSemiBold text-white">Power Platform</span>, <span className="font-PoppinsSemiBold text-white">Power Apps</span> and <span className="font-PoppinsSemiBold text-white">Power Automate</span>
+                I am a fullstack developer with three years of experience specializing in <span className="font-PoppinsSemiBold text-white">React</span>. I have expertise in building <span className="font-PoppinsSemiBold text-white">design systems</span>, <span className="font-PoppinsSemiBold text-white">system architecture</span>, and developing complete applications from scratch.
               </div>
             </div>
             <div className="mainbtn relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
@@ -347,7 +375,7 @@ function App() {
             <svg className='pic_element_3 absolute right-[18%] top-[30%] md:w-[80px] w-[50px] backdrop-blur-[4px]' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><foreignObject x="-4" y="-4" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml"></div></foreignObject><g data-figma-bg-blur-radius="4"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_564_3402)" fill-opacity="0.3" /><path d="M40 44.4531C42.4594 44.4531 44.4531 42.4594 44.4531 40C44.4531 37.5406 42.4594 35.5469 40 35.5469C37.5406 35.5469 35.5469 37.5406 35.5469 40C35.5469 42.4594 37.5406 44.4531 40 44.4531Z" fill="#61DAFB" /><path d="M56.9141 32.6562C56.0547 32.3437 55.1563 32.0313 54.2188 31.7578C54.4531 30.8203 54.6484 29.8828 54.8047 28.9844C55.625 23.8281 54.7266 20.1953 52.2266 18.7891C51.4844 18.3594 50.6641 18.1641 49.7266 18.1641C46.9922 18.1641 43.5156 20.1953 40 23.5937C36.4844 20.1953 33.0078 18.1641 30.2734 18.1641C29.3359 18.1641 28.5156 18.3594 27.7734 18.7891C25.2734 20.2344 24.375 23.8672 25.1953 28.9844C25.3516 29.8828 25.5469 30.8203 25.7813 31.7578C24.8438 32.0313 23.9453 32.3047 23.0859 32.6562C18.2031 34.5312 15.5469 37.1094 15.5469 40C15.5469 42.8906 18.2422 45.4688 23.0859 47.3438C23.9453 47.6563 24.8438 47.9688 25.7813 48.2422C25.5469 49.1797 25.3516 50.1172 25.1953 51.0156C24.375 56.1719 25.2734 59.8047 27.7734 61.2109C28.5156 61.6406 29.3359 61.8359 30.2734 61.8359C33.0469 61.8359 36.5234 59.8047 40 56.4063C43.5156 59.8047 46.9922 61.8359 49.7266 61.8359C50.6641 61.8359 51.4844 61.6406 52.2266 61.2109C54.7266 59.7656 55.625 56.1328 54.8047 51.0156C54.6484 50.1172 54.4531 49.1797 54.2188 48.2422C55.1563 47.9688 56.0547 47.6953 56.9141 47.3438C61.7969 45.4688 64.4531 42.8906 64.4531 40C64.4531 37.1094 61.7969 34.5312 56.9141 32.6562ZM51.1328 20.7422C52.7344 21.6797 53.2813 24.5703 52.6172 28.6719C52.5 29.4922 52.3047 30.3516 52.0703 31.25C50.0391 30.7812 47.8906 30.4687 45.625 30.2734C44.2969 28.3984 42.9297 26.7188 41.5625 25.1953C44.4531 22.3437 47.3828 20.3906 49.7656 20.3906C50.2734 20.3906 50.7422 20.5078 51.1328 20.7422ZM46.7578 43.9063C46.0547 45.1563 45.2344 46.4062 44.375 47.6562C42.9297 47.7734 41.4844 47.8125 40 47.8125C38.4766 47.8125 37.0312 47.7734 35.625 47.6562C34.7656 46.4062 33.9844 45.1563 33.2812 43.9063C32.5391 42.6172 31.8359 41.2891 31.2109 40C31.8359 38.7109 32.5391 37.3828 33.2812 36.0938C33.9844 34.8438 34.8047 33.5938 35.6641 32.3438C37.1094 32.2266 38.5547 32.1875 40.0391 32.1875C41.5625 32.1875 43.0078 32.2266 44.4141 32.3438C45.2734 33.5938 46.0547 34.8438 46.7578 36.0938C47.5 37.3828 48.2031 38.7109 48.8281 40C48.1641 41.2891 47.5 42.5781 46.7578 43.9063ZM50 42.6172C50.5859 43.9844 51.0547 45.3125 51.4844 46.6406C50.1562 46.9531 48.75 47.1875 47.2656 47.3828C47.7344 46.6406 48.2422 45.8594 48.6719 45.0391C49.1406 44.2188 49.5703 43.3984 50 42.6172ZM40 53.2031C39.0625 52.1875 38.1641 51.0938 37.3047 49.9609C38.2031 50 39.1016 50.0391 40 50.0391C40.8984 50.0391 41.7969 50 42.6953 49.9609C41.8359 51.0938 40.9375 52.1875 40 53.2031ZM32.7344 47.3438C31.25 47.1484 29.8437 46.9141 28.5156 46.6016C28.9453 45.3125 29.4141 43.9453 30 42.5781C30.4297 43.3594 30.8594 44.1797 31.3281 44.9609C31.7969 45.8203 32.2656 46.5625 32.7344 47.3438ZM30 37.3828C29.4141 36.0156 28.9453 34.6875 28.5156 33.3594C29.8437 33.0469 31.25 32.8125 32.7344 32.6172C32.2656 33.3594 31.7578 34.1406 31.3281 34.9609C30.8594 35.7812 30.4297 36.6016 30 37.3828ZM40 26.7969C40.9375 27.8125 41.8359 28.9062 42.6953 30.0391C41.7969 30 40.8984 29.9609 40 29.9609C39.1016 29.9609 38.2031 30 37.3047 30.0391C38.1641 28.9062 39.0625 27.8125 40 26.7969ZM48.6719 35L47.2656 32.6562C48.75 32.8516 50.1562 33.0859 51.4844 33.3984C51.0547 34.6875 50.5859 36.0547 50 37.4219C49.5703 36.6016 49.1406 35.7812 48.6719 35ZM27.3828 28.6719C26.7188 24.5703 27.2656 21.6797 28.8672 20.7422C29.2578 20.5078 29.7266 20.3906 30.2344 20.3906C32.5781 20.3906 35.5078 22.3047 38.4375 25.1953C37.0703 26.6797 35.7031 28.3984 34.375 30.2734C32.1094 30.4687 29.9609 30.8203 27.9297 31.25C27.6953 30.3516 27.5391 29.4922 27.3828 28.6719ZM17.7344 40C17.7344 38.1641 19.9609 36.2109 23.8672 34.7656C24.6484 34.4531 25.5078 34.1797 26.3672 33.9453C26.9922 35.8984 27.7734 37.9687 28.7109 40.0391C27.7734 42.1094 26.9531 44.1406 26.3672 46.0938C20.9766 44.5312 17.7344 42.1875 17.7344 40ZM28.8672 59.2578C27.2656 58.3203 26.7188 55.4297 27.3828 51.3281C27.5 50.5078 27.6953 49.6484 27.9297 48.75C29.9609 49.2188 32.1094 49.5313 34.375 49.7266C35.7031 51.6016 37.0703 53.2813 38.4375 54.8047C35.5469 57.6563 32.6172 59.6094 30.2344 59.6094C29.7266 59.6094 29.2578 59.4922 28.8672 59.2578ZM52.6172 51.3281C53.2813 55.4297 52.7344 58.3203 51.1328 59.2578C50.7422 59.4922 50.2734 59.6094 49.7656 59.6094C47.4219 59.6094 44.4922 57.6953 41.5625 54.8047C42.9297 53.3203 44.2969 51.6016 45.625 49.7266C47.8906 49.5313 50.0391 49.1797 52.0703 48.75C52.3047 49.6484 52.4609 50.5078 52.6172 51.3281ZM56.1328 45.2344C55.3516 45.5469 54.4922 45.8203 53.6328 46.0547C53.0078 44.1016 52.2266 42.0313 51.2891 39.9609C52.2266 37.8906 53.0469 35.8594 53.6328 33.9063C59.0234 35.4688 62.2656 37.8125 62.2656 40C62.2656 41.8359 60 43.7891 56.1328 45.2344Z" fill="#61DAFB" /></g><defs><clipPath id="bgblur_0_564_3402_clip_path" transform="translate(4 4)"><rect width="80" height="80" rx="40" /></clipPath><linearGradient id="paint0_linear_564_3402" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#2D3190" /><stop offset="1" stop-color="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_4 absolute top-0 left-[12%] md:w-[30px] w-[18px]' viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="15" fill="url(#paint0_linear_198_554)" fillOpacity="0.5" /><defs><linearGradient id="paint0_linear_198_554" x1="0" y1="15" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_5 absolute bottom-[17%] right-[14%] md:w-[30px] w-[18px] flex -z-10' viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="15" fill="url(#paint0_linear_198_554)" fillOpacity="0.5" /><defs><linearGradient id="paint0_linear_198_554" x1="0" y1="15" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
-            <BgDottedCircle bottom="20%" right="10%" height="350px" width="350px" degrees={250} />
+            <BgDottedCircle className="bottom-[20%] right-[10%] h-[200px] w-[200px] md:h-[350px] md:w-[350px]" degrees={250} />
             <div className="bg-blurred-circle absolute left-[45%] w-[600px] h-[600px] rounded-full -translate-x-1/2 pointer-events-none z-[-10]" />
           </div>
         </div>
@@ -371,8 +399,8 @@ function App() {
         </div>
 
         <div className='body max-w-[88rem] mx-auto flex flex-col md:flex-row items-center pt-[3rem] md:pt-[8rem] pb-[3rem] md:pb-[8rem] md:gap-12 gap-[10px] z-10 px-6'>
-          <div className='relative grid grid-cols-3 gap-[3rem] w-full h-auto'>
-            <BgDottedCircle top="-8%" left="-6%" degrees={135} />
+          <div className='relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[3rem] w-full h-auto'>
+            <BgDottedCircle className="top-[-8%] left-[-6%] md:h-[200px] md:w-[200px]" degrees={135} />
             {projects?.map((projectItem, index) => {
               return (
                 <div key={index} className="flex flex-col gap-[1rem]" onClick={() => openModal(projectItem)}>
@@ -401,7 +429,7 @@ function App() {
                 <svg width="24" height="30" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.50684 11.8725L7.10144 5.658C10.0715 1.6395 11.5565 -0.367496 12.9381 0.0555041C14.3241 0.478504 14.3241 2.9445 14.3241 7.872V8.3355C14.3241 10.113 14.3241 10.9995 14.8911 11.5575L14.9226 11.5845C15.5031 12.129 16.4257 12.129 18.2752 12.129C21.6053 12.129 23.2658 12.129 23.8283 13.137C23.8373 13.155 23.8463 13.1685 23.8553 13.1865C24.3863 14.2125 23.4233 15.5175 21.4973 18.123L16.9027 24.342C13.9326 28.3605 12.4476 30.3675 11.0615 29.9445C9.6755 29.5215 9.6755 27.0555 9.6755 22.128V21.6645C9.6755 19.887 9.6755 19.0005 9.10848 18.4425L9.07698 18.4155C8.49647 17.871 7.57395 17.871 5.72441 17.871C2.39433 17.871 0.733796 17.871 0.171283 16.863C0.162283 16.845 0.153282 16.8315 0.144282 16.8135C-0.38673 15.783 0.580792 14.478 2.50684 11.8725Z" fill="url(#paint0_linear_637_673)" /><defs><linearGradient id="paint0_linear_637_673" x1="0" y1="15" x2="24" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#2D5CFF" /><stop offset="1" stop-color="#2D3190" /></linearGradient></defs></svg>
               </div>
               <div className="text-lg text-white">{t('Aqui pode ser seu projeto!')}</div>
-              <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
+              <div className="relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-[160px] px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
                 <div className="absolute top-0 left-0 h-[100%] w-[100%] animate-border-spin content-['']" style={{ background: 'conic-gradient(from 90deg at 50% 50%, rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, 0) 340deg, #FFFFFF 360deg)' }}></div>
                 <a href='https://barbershop-frontend-three.vercel.app/' target="_blank" rel="noopener noreferrer" className='absolute top-0 left-0 flex items-center justify-center m-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-full bg-gradient-to-r from-[#2D3190] to-[#2D5CFF]'>
                   <span className="absolute bg-blue-300 shadow-blue-400 -right-[100%] top-0 inline-flex w-[5px] h-full rounded-md opacity-50 group-hover:right-[120%] duration-700 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)] rotate-[15deg]" />
@@ -533,7 +561,7 @@ function App() {
           <div className='max-w-[88rem] w-full mx-auto flex flex-wrap items-start py-[2rem] md:py-[3rem] gap-[20px] z-10 px-6'>
             <div className='relative inline-flex flex-col items-center bg-[#20212280] w-full md:max-w-[350px] rounded-[16px] p-[50px] gap-[20px]'>
               <img src={dudu_portrait} className='w-[200px] my-[20px] rounded-full shadow-[0px_0px_30px_rgba(227,228,237,0.05)] z-10' alt='Dudu_Portrait' />
-              <BgDottedCircle right="50px" height="120px" width="120px" degrees={200} />
+              <BgDottedCircle className="right-[50px] h-[120px] w-[120px] md:h-[120px] md:w-[120px]" degrees={200} />
               <div className='flex w-full gap-[10px] p-1'>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_240_1163)"><path d="M22 7.53516V17.0002C22 17.7654 21.7077 18.5017 21.1827 19.0584C20.6578 19.6152 19.9399 19.9503 19.176 19.9952L19 20.0002H5C4.23479 20.0002 3.49849 19.7078 2.94174 19.1829C2.38499 18.6579 2.04989 17.94 2.005 17.1762L2 17.0002V7.53516L11.445 13.8322L11.561 13.8982C11.6977 13.965 11.8478 13.9997 12 13.9997C12.1522 13.9997 12.3023 13.965 12.439 13.8982L12.555 13.8322L22 7.53516Z" fill="url(#paint0_linear_240_1163)" /><path d="M19 4C20.08 4 21.027 4.57 21.555 5.427L12 11.797L2.44501 5.427C2.69574 5.01977 3.04022 4.6784 3.44971 4.43138C3.85921 4.18436 4.32184 4.03886 4.79901 4.007L5.00001 4H19Z" fill="url(#paint1_linear_240_1163)" /></g><defs><linearGradient id="paint0_linear_240_1163" x1="2" y1="13.7677" x2="22" y2="13.7677" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient><linearGradient id="paint1_linear_240_1163" x1="2.44501" y1="7.8985" x2="21.555" y2="7.8985" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient><clipPath id="clip0_240_1163"><rect width="24" height="24" fill="white" /></clipPath></defs></svg>
                 <p className='text-white'>duduscala@gmail.com</p>
@@ -576,7 +604,7 @@ function App() {
                   <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Criando e refatorando interfaces para melhorar a experiência do cliente.')}</div>
                 </div>
               </div>
-              <BgDottedCircle right="-50px" bottom="-30px" height="200px" width="200px" degrees={315} />
+              <BgDottedCircle className="right-[-50px] bottom-[-30px] md:h-[200px] md:w-[200px]" degrees={315} />
             </div>
           </div>
           <div className="bg-blurred-circle absolute bottom-0 w-[30%] h-[100%] rounded-full -translate-x-1/2 pointer-events-none z-[-10]" />
@@ -629,7 +657,7 @@ function App() {
                 <ul className="bg-[#1C1E22] flex flex-wrap gap-[40px] justify-center max-h-100vh overflow-auto custom-scrollbar p-8">
                   {selectedProject.gallery.map((projectItem, index) => (
                     <li className="flex flex-col items-center gap-4">
-                      <img className="w-[320px] rounded-lg" src={projectItem.image} alt={`${projectItem.alt} showcase`} />
+                      <img className={`${projectItem.device === "mobile" ? "w-[320px]" : "w-full"} rounded-lg`} src={projectItem.image} alt={`${projectItem.alt} showcase`} />
                       <p className="text-white">{projectItem.alt}</p>
                     </li>
                   ))}
