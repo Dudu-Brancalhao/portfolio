@@ -37,9 +37,15 @@ export default {
         'Sistema de Delivery (B2B)': 'Delivery System (B2B)',
         'Interface de Arquivos': 'Files Interface',
         'Aqui pode ser seu projeto!': 'This could be your project!',
-        'Aplicativo mobile para controle e gestão de barbearias': 'Mobile application for controlling and managing barbershops',
+        'Aplicativo mobile para controle e gestão de barbearia': 'Mobile application for barber shop control and management ',
         'Aplicativo mobile para postagem e candidaturas de vagas': 'Mobile application for posting and applying for jobs',
         'Aplicativo para controle e gestão de delivery B2B': 'Application for B2B delivery control and management',
         'Site para empresa PARLAK': 'Application for B2B delivery control and management',
+        'Visão geral': 'Overview',
+        'Principais funcionalidades': 'Functionalities',
+        'Meu papel': 'My Role',
+        'Este é um aplicativo mobile completo para barbearia, permitindo agendamentos, gestão de clientes e serviços. O projeto inclui um design system robusto para garantir consistência visual e uma ótima experiência de usuário.': 'This is a complete mobile application for barbershops, enabling appointments, client management, and service handling. The project includes a robust design system to ensure visual consistency and an excellent user experience.',
+        'Sistema de Agendamentos, Gestão de Clientes, Catálogo de Serviços, Painel Administrativo.': 'Appointment System, Client Management, Service Catalog, Administrative Dashboard.',
+        'Atuei como desenvolvedor full stack único do projeto, sendo responsável por todas as etapas do desenvolvimento. No front-end, construí a interface mobile completa com foco em usabilidade e performance, implementando o design system do zero. No back-end, desenvolvi toda a API RESTful, lógica de negócios e integrações necessárias. Também modelei e implementei o banco de dados, definindo estruturas de tabelas, relacionamentos e queries otimizadas. Além disso, gerenciei o ciclo completo de desenvolvimento, desde o planejamento arquitetural até o deploy.': 'I worked as the sole full stack developer on the project, being responsible for all development stages. On the front-end, I built the complete mobile interface focusing on usability and performance, implementing the design system from scratch. On the back-end, I developed the entire RESTful API, business logic, and necessary integrations. I also modeled and implemented the database, defining table structures, relationships, and optimized queries. Additionally, I managed the complete development cycle, from architectural planning to deployment.',
     }
 }

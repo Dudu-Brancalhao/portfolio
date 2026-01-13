@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface ModalProps {
   show: boolean;
   onClose: () => void;
-  title: string;
+  description: React.ReactNode;
   footerButtons?: React.ReactNode[];
-  children: React.ReactNode;
+  gallery: React.ReactNode;
   size?: "small" | "medium" | "large" | "extra-large" | "fullscreen";
   action?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -13,54 +13,66 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   show,
   onClose,
-  title,
+  description,
   footerButtons,
-  children,
+  gallery,
   size = "medium",
   action,
 }) => {
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [show]);
+
   if (!show) return null;
 
   const sizeClass =
     size === "small"
       ? "max-w-sm"
       : size === "large"
-      ? "max-w-3xl"
-      : size === "extra-large"
-      ? "max-w-6xl"
-      : size === "fullscreen"
-      ? "max-w-100vw"
-      : "max-w-lg";
+        ? "max-w-3xl"
+        : size === "extra-large"
+          ? "max-w-6xl"
+          : size === "fullscreen"
+            ? "w-full h-full"
+            : "max-w-lg";
+
+  const isFullscreen = size === "fullscreen";
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50"
       tabIndex={-1}
       role="dialog"
     >
       <div
-        className={`relative w-full ${sizeClass}`}
+        className={`relative ${isFullscreen ? 'w-full h-full' : `w-full ${sizeClass}`}`}
         role="document"
       >
-        <div className="relative flex flex-col w-full bg-[#101216] border-0 rounded-lg shadow-lg">
-          <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
-            <h5 className="text-2xl font-semibold">{title}</h5>
-
-            <button
-              type="button"
-              className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-              aria-label="Close"
-              onClick={onClose}
-            >
-              <span className="h-6 w-6 text-2xl block outline-none focus:outline-none text-gray-500 hover:text-gray-800">×</span>
-            </button>
+        <div className="fixed z-[1] right-0 top-0 p-[20px] ml-auto ">
+          <button
+            type="button"
+            className="bg-transparent hover:bg-white hover:scale-115 transition-all duration-[400ms] border border-[#707070] rounded-md text-black float-right text-3xl leading-none outline-none focus:outline-none"
+            aria-label="Close"
+            onClick={onClose}
+          >
+            <span className="flex justify-center items-center h-6 w-6 text-2xl block outline-none focus:outline-none text-white hover:text-gray-500">×</span>
+          </button>
+        </div>
+        <div className={`relative grid grid-cols-[440px_1fr] w-full bg-[#101216] border-0 shadow-lg ${isFullscreen ? 'h-full' : 'rounded-lg'}`}>
+          <div className="overflow-y-auto custom-scrollbar items-start justify-between flex-shrink-0">
+            {description}
           </div>
 
-          <form id="modal-form" onSubmit={action}>
-            <div className="relative p-6 flex-auto overflow-y-auto max-h-[60vh]">{children}</div>
+          {gallery}
 
-            <div className="flex items-center justify-end p-6 border-t border-solid rounded-b border-slate-200">{footerButtons && footerButtons}</div>
-          </form>
         </div>
       </div>
     </div>
