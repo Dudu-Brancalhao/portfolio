@@ -1,9 +1,9 @@
 import { gsap } from "gsap";
 import SplitType from 'split-type';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { useEffect, useState, useCallback, Fragment } from 'react';
+import { cloneElement, useLayoutEffect, useState, useCallback, Fragment } from 'react';
 import logo from './logo.svg';
-import dudu_photo from './midia/Dudu_photo.png';
+import dudu_photo from './midia/profile-frame.png';
 import barbershop_thumb from './midia/barbershop_thumb.png';
 import { login, bookings, gallery, homeServices, professionals, schedule, confirmationModal, scheduleSettings, scheduleSettingsModal } from './midia/app_barbershop';
 import { login_hub4you, applyModal, brandManual, company, emptyNotifications, home, newPostModal, notifications, profile, fullProfile } from './midia/app_hub4you';
@@ -12,7 +12,6 @@ import parlakLandingPage from './midia/parlak/parlak_landing_page.png';
 import b2b_thumb from './midia/b2b_thumb.png';
 import hub4you_thumb from './midia/hub4you_thumb.png';
 import parlak_thumb from './midia/parlak_thumb.png';
-import intellij_logo from './midia/intellij_logo.png';
 import postman_logo from './midia/postman_logo.png';
 import dudu_portrait from './midia/Dudu_portrait_2.png';
 import BgDottedCircle from './dotted-circle.jsx';
@@ -56,6 +55,8 @@ function App() {
     const newLanguage = languageSelected === "en-US" ? "pt-BR" : "en-US";
     // When changing language, close the modal if it's open
     closeModal();
+    // Scroll back to the top so the replayed intro animation is visible
+    gsap.to(window, { duration: 0.5, scrollTo: 0, ease: 'power2.inOut' });
     i18n.changeLanguage(newLanguage);
     setLanguageSelected(newLanguage);
   }, [languageSelected, i18n]);
@@ -77,7 +78,7 @@ function App() {
   };
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const typeSplit = new SplitType('.animate', {
       types: 'lines',
     });
@@ -135,6 +136,7 @@ function App() {
             opacity: 1,
             duration: 0.4,
             ease: "power3.in",
+            clearProps: "transform",
           });
           gsap.to('.bg-blurred-circle', {
             opacity: 1,
@@ -163,7 +165,7 @@ function App() {
       ctx.revert();
       typeSplit.revert();
     };
-  }, []);
+  }, [languageSelected]);
 
   const projects = [
     {
@@ -324,12 +326,12 @@ function App() {
         <div id='home' className='body max-w-[88rem] mx-auto md:h-[850px] flex flex-col-reverse md:flex-row items-center pt-[1rem] md:pt-[8rem] pb-[1rem] md:pb-[8rem] gap-12 z-10 px-6'>
           <div className='relative w-full h-full flex flex-col gap-10 md:text-left sm:pt-20'>
             <BgDottedCircle className="top-[0px] left-[-12%] md:h-[200px] md:w-[200px]" degrees={135} />
-            <div className='flex flex-col gap-4'>
+            <div key={languageSelected} className='flex flex-col gap-4'>
               <div className="animate line font-PoppinsLight text-white text-lg">{t('Olá 👋🏻, eu sou')}</div>
               <div className='animate line font-PoppinsBold text-white text-3xl sm:text-5xl'>Eduardo Brancalhão</div>
               <div className="relative">
                 <div id="flat-text" className='animate line font-PoppinsSemiBold text-2xl sm:text-3xl text-[#2D5CFF]'>
-                  {t('Desenvolvedor Fullstack')}
+                  {t('Engenheiro de Software')}
                 </div>
                 <div id="gradient-text" className='font-PoppinsSemiBold text-2xl sm:text-3xl hidden' style={{
                   background: 'linear-gradient(135deg, #2D5CFF 0%, rgba(45, 49, 144, 0.8) 100%)',
@@ -338,14 +340,15 @@ function App() {
                   backgroundClip: 'text',
                   textFillColor: 'transparent',
                 }} >
-                  {t('Desenvolvedor Fullstack')}
+                  {t('Engenheiro de Software')}
                 </div>
               </div>
-              <div className={`animate line text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>
-                Sou desenvolvedor fullstack com três anos de experiência especializado em <span className="font-PoppinsSemiBold text-white">React</span>. Tenho expertise em construção de <span className="font-PoppinsSemiBold text-white">design systems</span>, <span className="font-PoppinsSemiBold text-white">arquitetura de sistemas</span> e desenvolvimento de aplicações completas do zero.
-              </div>
-              <div className={`animate line text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>
-                I am a fullstack developer with three years of experience specializing in <span className="font-PoppinsSemiBold text-white">React</span>. I have expertise in building <span className="font-PoppinsSemiBold text-white">design systems</span>, <span className="font-PoppinsSemiBold text-white">system architecture</span>, and developing complete applications from scratch.
+              <div className="animate line text-[#94A3B8] leading-[30px]">
+                {languageSelected === "en-US" ? (
+                  <>I am a software engineer with <span className="font-PoppinsSemiBold text-white">4+ years of experience</span> shipping production software. I started in frontend engineering and grew into fullstack, product-minded development, today I work primarily as a <span className="font-PoppinsSemiBold text-white">backend engineer</span> in the <span className="font-PoppinsSemiBold text-white">FinTech and crypto-wallets</span> space, building the systems that move real money and assets <span className="font-PoppinsSemiBold text-white">on-chain</span>.</>
+                ) : (
+                  <>Sou engenheiro de software com mais de <span className="font-PoppinsSemiBold text-white">4 anos de experiência</span> entregando software em produção. Comecei no frontend e evoluí para o desenvolvimento fullstack com visão de produto, hoje atuo principalmente como <span className="font-PoppinsSemiBold text-white">engenheiro backend</span> no universo de <span className="font-PoppinsSemiBold text-white">FinTech e crypto wallets</span>, construindo os sistemas que movimentam dinheiro e ativos reais <span className="font-PoppinsSemiBold text-white">on-chain</span>.</>
+                )}
               </div>
             </div>
             <div className="mainbtn relative overflow-hidden rounded-2xl min-h-[40px] md:w-[162px] w-full px-12 py-2 text-white rounded-full cursor-pointer overflow-hidden hover:brightness-150 active:opacity-75 outline-none duration-300 group ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#101845] transition-all">
@@ -369,9 +372,9 @@ function App() {
             </div>
           </div>
           <div className='relative w-full h-[-webkit-fill-available] flex justify-center items-center pt-5 sm:pt-0'>
-            <img src={dudu_photo} alt='dudu-photo' className='image_photo md:h-[-webkit-fill-available] object-contain' />
-            <svg className='pic_element_1 absolute top-0 right-[33%] md:w-[80px] w-[50px] backdrop-blur-[4px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_537)" fillOpacity="0.3" /><path d="M56.4215 22.3402C55.8661 23.674 55.1473 24.9334 54.2815 26.0896C52.428 24.1697 50.2086 22.6416 47.7547 21.5957C45.3009 20.5497 42.6624 20.0071 39.9954 20.0001C37.3285 19.993 34.6872 20.5216 32.2278 21.5545C29.7685 22.5875 27.5411 24.1038 25.6774 26.0138C23.8137 27.9238 22.3516 30.1887 21.3775 32.6744C20.4035 35.1601 19.9374 37.8161 20.0067 40.4854C20.0761 43.1546 20.6795 45.7828 21.7812 48.2145C22.883 50.6461 24.4607 52.8318 26.421 54.6423L27.1618 55.3015C29.9728 57.675 33.3852 59.2233 37.021 59.7749C40.6568 60.3265 44.3741 59.8598 47.7613 58.4265C51.1485 56.9932 54.0733 54.6493 56.212 51.6544C58.3506 48.6594 59.6196 45.1303 59.8783 41.4578C60.4545 36.4312 58.9318 30.0037 56.4215 22.3402ZM29.3017 54.8071C29.0901 55.0674 28.8062 55.2591 28.4859 55.3579C28.1655 55.4567 27.8231 55.4582 27.5018 55.3623C27.1806 55.2663 26.895 55.0771 26.6811 54.8187C26.4672 54.5603 26.3346 54.2442 26.3001 53.9103C26.2656 53.5765 26.3308 53.2399 26.4873 52.9431C26.6438 52.6463 26.8847 52.4026 27.1795 52.2428C27.4743 52.083 27.8098 52.0144 28.1436 52.0454C28.4774 52.0765 28.7945 52.2059 29.0548 52.4174C29.3961 52.7068 29.6124 53.1171 29.6584 53.5625C29.7044 54.0079 29.5766 54.4538 29.3017 54.8071ZM56.298 48.8328C51.4008 55.3839 40.8657 53.159 34.1578 53.4886C34.1578 53.4886 32.9643 53.571 31.7709 53.7358C31.7709 53.7358 32.2236 53.5298 32.7997 53.3238C37.5323 51.6757 39.7546 51.3461 42.6353 49.8629C48.0263 47.1024 53.4173 41.0457 54.4873 34.7831C52.4297 40.7985 46.1744 45.9899 40.4953 48.0912C36.5858 49.5333 29.5487 50.9341 29.5487 50.9341L29.2606 50.7693C24.4868 48.4208 24.3222 38.038 33.0467 34.7007C36.8739 33.2174 40.4953 34.0415 44.6518 33.0526C49.0551 32.0226 54.1581 28.7265 56.2157 24.4003C58.5203 31.3634 61.3187 42.1582 56.298 48.8328Z" fill="#6DB33F" /><defs><linearGradient id="paint0_linear_198_537" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
-            <svg className='pic_element_2 absolute left-[9%] top-[20%] md:w-[80px] w-[50px] backdrop-blur-[4px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_546)" fillOpacity="0.3" /><path d="M40.427 39.9998C40.427 36.3179 43.4118 33.3332 47.0937 33.3332C50.7756 33.3332 53.7604 36.318 53.7604 39.9998C53.7604 43.6818 50.7755 46.6665 47.0937 46.6665C43.4117 46.6665 40.427 43.6817 40.427 39.9998Z" fill="#00BCFF" /><path d="M27.0939 53.3333C27.0939 49.6514 30.0787 46.6666 33.7606 46.6666L37.3133 44.7909L40.4272 46.6666V53.3333C40.4272 57.0153 37.4425 60 33.7606 60C30.0787 60 27.0939 57.0152 27.0939 53.3333Z" fill="#00CF7F" /><path d="M40.4271 20L36.7994 26.3024L40.4271 33.3334H47.0003C50.6823 33.3334 53.667 30.3486 53.667 26.6667C53.667 22.9848 50.6822 20 47.0003 20H40.4271Z" fill="#FF7361" /><path d="M27 26.6667C27 30.3486 29.9848 33.3334 33.6667 33.3334L37.2032 34.6993L40.4269 33.3334V20H33.6666C29.9848 20 27 22.9848 27 26.6667Z" fill="#FF4D12" /><path d="M27.0939 39.9999C27.0939 43.6819 30.0787 46.6666 33.7606 46.6666H40.4272V33.3332H33.7606C30.0787 33.3332 27.0939 36.318 27.0939 39.9999Z" fill="#B659FF" /><defs><linearGradient id="paint0_linear_198_546" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
+            <img src={dudu_photo} alt='self-portrait' className='image_photo md:h-[-webkit-fill-available] object-contain' />
+            <svg className='pic_element_1 absolute top-0 right-[33%] md:w-[80px] w-[50px] backdrop-blur-[4px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_537)" fillOpacity="0.3" />{cloneElement(stackIcons.claude.svg, { x: 18, y: 18, width: 44, height: 44 })}<defs><linearGradient id="paint0_linear_198_537" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
+            <svg className='pic_element_2 absolute left-[9%] top-[20%] md:w-[80px] w-[50px] backdrop-blur-[4px]' viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_198_546)" fillOpacity="0.3" />{cloneElement(stackIcons.node.svg, { x: 18, y: 18, width: 44, height: 44 })}<defs><linearGradient id="paint0_linear_198_546" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_3 absolute right-[18%] top-[30%] md:w-[80px] w-[50px] backdrop-blur-[4px]' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><foreignObject x="-4" y="-4" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml"></div></foreignObject><g data-figma-bg-blur-radius="4"><rect width="80" height="80" rx="40" fill="url(#paint0_linear_564_3402)" fill-opacity="0.3" /><path d="M40 44.4531C42.4594 44.4531 44.4531 42.4594 44.4531 40C44.4531 37.5406 42.4594 35.5469 40 35.5469C37.5406 35.5469 35.5469 37.5406 35.5469 40C35.5469 42.4594 37.5406 44.4531 40 44.4531Z" fill="#61DAFB" /><path d="M56.9141 32.6562C56.0547 32.3437 55.1563 32.0313 54.2188 31.7578C54.4531 30.8203 54.6484 29.8828 54.8047 28.9844C55.625 23.8281 54.7266 20.1953 52.2266 18.7891C51.4844 18.3594 50.6641 18.1641 49.7266 18.1641C46.9922 18.1641 43.5156 20.1953 40 23.5937C36.4844 20.1953 33.0078 18.1641 30.2734 18.1641C29.3359 18.1641 28.5156 18.3594 27.7734 18.7891C25.2734 20.2344 24.375 23.8672 25.1953 28.9844C25.3516 29.8828 25.5469 30.8203 25.7813 31.7578C24.8438 32.0313 23.9453 32.3047 23.0859 32.6562C18.2031 34.5312 15.5469 37.1094 15.5469 40C15.5469 42.8906 18.2422 45.4688 23.0859 47.3438C23.9453 47.6563 24.8438 47.9688 25.7813 48.2422C25.5469 49.1797 25.3516 50.1172 25.1953 51.0156C24.375 56.1719 25.2734 59.8047 27.7734 61.2109C28.5156 61.6406 29.3359 61.8359 30.2734 61.8359C33.0469 61.8359 36.5234 59.8047 40 56.4063C43.5156 59.8047 46.9922 61.8359 49.7266 61.8359C50.6641 61.8359 51.4844 61.6406 52.2266 61.2109C54.7266 59.7656 55.625 56.1328 54.8047 51.0156C54.6484 50.1172 54.4531 49.1797 54.2188 48.2422C55.1563 47.9688 56.0547 47.6953 56.9141 47.3438C61.7969 45.4688 64.4531 42.8906 64.4531 40C64.4531 37.1094 61.7969 34.5312 56.9141 32.6562ZM51.1328 20.7422C52.7344 21.6797 53.2813 24.5703 52.6172 28.6719C52.5 29.4922 52.3047 30.3516 52.0703 31.25C50.0391 30.7812 47.8906 30.4687 45.625 30.2734C44.2969 28.3984 42.9297 26.7188 41.5625 25.1953C44.4531 22.3437 47.3828 20.3906 49.7656 20.3906C50.2734 20.3906 50.7422 20.5078 51.1328 20.7422ZM46.7578 43.9063C46.0547 45.1563 45.2344 46.4062 44.375 47.6562C42.9297 47.7734 41.4844 47.8125 40 47.8125C38.4766 47.8125 37.0312 47.7734 35.625 47.6562C34.7656 46.4062 33.9844 45.1563 33.2812 43.9063C32.5391 42.6172 31.8359 41.2891 31.2109 40C31.8359 38.7109 32.5391 37.3828 33.2812 36.0938C33.9844 34.8438 34.8047 33.5938 35.6641 32.3438C37.1094 32.2266 38.5547 32.1875 40.0391 32.1875C41.5625 32.1875 43.0078 32.2266 44.4141 32.3438C45.2734 33.5938 46.0547 34.8438 46.7578 36.0938C47.5 37.3828 48.2031 38.7109 48.8281 40C48.1641 41.2891 47.5 42.5781 46.7578 43.9063ZM50 42.6172C50.5859 43.9844 51.0547 45.3125 51.4844 46.6406C50.1562 46.9531 48.75 47.1875 47.2656 47.3828C47.7344 46.6406 48.2422 45.8594 48.6719 45.0391C49.1406 44.2188 49.5703 43.3984 50 42.6172ZM40 53.2031C39.0625 52.1875 38.1641 51.0938 37.3047 49.9609C38.2031 50 39.1016 50.0391 40 50.0391C40.8984 50.0391 41.7969 50 42.6953 49.9609C41.8359 51.0938 40.9375 52.1875 40 53.2031ZM32.7344 47.3438C31.25 47.1484 29.8437 46.9141 28.5156 46.6016C28.9453 45.3125 29.4141 43.9453 30 42.5781C30.4297 43.3594 30.8594 44.1797 31.3281 44.9609C31.7969 45.8203 32.2656 46.5625 32.7344 47.3438ZM30 37.3828C29.4141 36.0156 28.9453 34.6875 28.5156 33.3594C29.8437 33.0469 31.25 32.8125 32.7344 32.6172C32.2656 33.3594 31.7578 34.1406 31.3281 34.9609C30.8594 35.7812 30.4297 36.6016 30 37.3828ZM40 26.7969C40.9375 27.8125 41.8359 28.9062 42.6953 30.0391C41.7969 30 40.8984 29.9609 40 29.9609C39.1016 29.9609 38.2031 30 37.3047 30.0391C38.1641 28.9062 39.0625 27.8125 40 26.7969ZM48.6719 35L47.2656 32.6562C48.75 32.8516 50.1562 33.0859 51.4844 33.3984C51.0547 34.6875 50.5859 36.0547 50 37.4219C49.5703 36.6016 49.1406 35.7812 48.6719 35ZM27.3828 28.6719C26.7188 24.5703 27.2656 21.6797 28.8672 20.7422C29.2578 20.5078 29.7266 20.3906 30.2344 20.3906C32.5781 20.3906 35.5078 22.3047 38.4375 25.1953C37.0703 26.6797 35.7031 28.3984 34.375 30.2734C32.1094 30.4687 29.9609 30.8203 27.9297 31.25C27.6953 30.3516 27.5391 29.4922 27.3828 28.6719ZM17.7344 40C17.7344 38.1641 19.9609 36.2109 23.8672 34.7656C24.6484 34.4531 25.5078 34.1797 26.3672 33.9453C26.9922 35.8984 27.7734 37.9687 28.7109 40.0391C27.7734 42.1094 26.9531 44.1406 26.3672 46.0938C20.9766 44.5312 17.7344 42.1875 17.7344 40ZM28.8672 59.2578C27.2656 58.3203 26.7188 55.4297 27.3828 51.3281C27.5 50.5078 27.6953 49.6484 27.9297 48.75C29.9609 49.2188 32.1094 49.5313 34.375 49.7266C35.7031 51.6016 37.0703 53.2813 38.4375 54.8047C35.5469 57.6563 32.6172 59.6094 30.2344 59.6094C29.7266 59.6094 29.2578 59.4922 28.8672 59.2578ZM52.6172 51.3281C53.2813 55.4297 52.7344 58.3203 51.1328 59.2578C50.7422 59.4922 50.2734 59.6094 49.7656 59.6094C47.4219 59.6094 44.4922 57.6953 41.5625 54.8047C42.9297 53.3203 44.2969 51.6016 45.625 49.7266C47.8906 49.5313 50.0391 49.1797 52.0703 48.75C52.3047 49.6484 52.4609 50.5078 52.6172 51.3281ZM56.1328 45.2344C55.3516 45.5469 54.4922 45.8203 53.6328 46.0547C53.0078 44.1016 52.2266 42.0313 51.2891 39.9609C52.2266 37.8906 53.0469 35.8594 53.6328 33.9063C59.0234 35.4688 62.2656 37.8125 62.2656 40C62.2656 41.8359 60 43.7891 56.1328 45.2344Z" fill="#61DAFB" /></g><defs><clipPath id="bgblur_0_564_3402_clip_path" transform="translate(4 4)"><rect width="80" height="80" rx="40" /></clipPath><linearGradient id="paint0_linear_564_3402" x1="0" y1="40" x2="80" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#2D3190" /><stop offset="1" stop-color="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_4 absolute top-0 left-[12%] md:w-[30px] w-[18px]' viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="15" fill="url(#paint0_linear_198_554)" fillOpacity="0.5" /><defs><linearGradient id="paint0_linear_198_554" x1="0" y1="15" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
             <svg className='pic_element_5 absolute bottom-[17%] right-[14%] md:w-[30px] w-[18px] flex -z-10' viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="15" fill="url(#paint0_linear_198_554)" fillOpacity="0.5" /><defs><linearGradient id="paint0_linear_198_554" x1="0" y1="15" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stopColor="#2D3190" /><stop offset="1" stopColor="#2D5CFF" /></linearGradient></defs></svg>
@@ -405,7 +408,7 @@ function App() {
               return (
                 <div key={index} className="flex flex-col gap-[1rem]" onClick={() => openModal(projectItem)}>
                   <div className="w-full aspect-square bg-[#181C20] rounded-[16px] border-[1px] border-[#ffffff0D] hover:border-[#2D5CFF] shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] hover:shadow-[0_0px_60px_0_rgba(45,92,255,0.5)] duration-300 ease-in-out hover:scale-105 cursor-pointer">
-                    <img src={projectItem.img} alt={projectItem.img} className='image_photo rounded-[16px] md:h-[-webkit-fill-available] object-contain' />
+                    <img src={projectItem.img} alt={projectItem.img} className='rounded-[16px] md:h-[-webkit-fill-available] object-contain' />
                   </div>
                   <div className="flex flex-row gap-[10px]">
                     {projectItem.tags?.map((tag, index) => {
@@ -501,21 +504,9 @@ function App() {
           </div>
           <div className="tooltip-container z-10">
             <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
-              {stackIcons.bootstrap.svg}
-            </div>
-            <div role="tooltip" id="help-tooltip" className="tooltip">Bootstrap</div>
-          </div>
-          <div className="tooltip-container z-10">
-            <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
               {stackIcons.tailwind.svg}
             </div>
             <div role="tooltip" id="help-tooltip" className="tooltip">Tailwind</div>
-          </div>
-          <div className="tooltip-container z-10">
-            <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
-              {stackIcons.graphql.svg}
-            </div>
-            <div role="tooltip" id="help-tooltip" className="tooltip">GraphQL</div>
           </div>
           <div className="tooltip-container z-10">
             <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
@@ -524,14 +515,16 @@ function App() {
             <div role="tooltip" id="help-tooltip" className="tooltip">Next.js</div>
           </div>
           <div className="tooltip-container z-10">
-            <img src={intellij_logo} className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10' alt='IntelliJ_logo' />
-            <div role="tooltip" id="help-tooltip" className="tooltip">IntelliJ</div>
-          </div>
-          <div className="tooltip-container z-10">
             <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
               {stackIcons.postgres.svg}
             </div>
             <div role="tooltip" id="help-tooltip" className="tooltip">Postgres</div>
+          </div>
+          <div className="tooltip-container z-10">
+            <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
+              {stackIcons.prisma.svg}
+            </div>
+            <div role="tooltip" id="help-tooltip" className="tooltip">Prisma</div>
           </div>
           <div className="tooltip-container z-10">
             <img src={postman_logo} className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10' alt='Postman_logo' />
@@ -554,6 +547,18 @@ function App() {
               {stackIcons.springBoot.svg}
             </div>
             <div role="tooltip" id="help-tooltip" className="tooltip">Spring Boot</div>
+          </div>
+          <div className="tooltip-container z-10">
+            <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
+              {stackIcons.node.svg}
+            </div>
+            <div role="tooltip" id="help-tooltip" className="tooltip">Node.js</div>
+          </div>
+          <div className="tooltip-container z-10">
+            <div className='w-[70px] h-[70px] p-5 hover:scale-125 transition-all z-10'>
+              {stackIcons.claude.svg}
+            </div>
+            <div role="tooltip" id="help-tooltip" className="tooltip">Claude</div>
           </div>
           <div className="bg-blurred-circle absolute translate-y-1/2 bottom-0 w-[1400px] h-[420px] rounded-full pointer-events-none z-[-10]" />
         </div>
@@ -582,26 +587,30 @@ function App() {
             <div className='relative flex flex-col gap-[20px] flex-1 min-w-0'>
               <div className='flex flex-col bg-[#20212280] rounded-[16px] px-[40px] py-[30px] gap-[20px]'>
                 <p className='font-PoppinsBold text-white text-2xl sm:text-3xl'>{t('Sobre mim')}</p>
-                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>👋🏻️ Meu nome é <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> e sou <span className="font-PoppinsSemiBold text-white">desenvolvedor fullstack</span>, com 3 anos de experiência no mercado. Sou graduado em Engenharia de Software (UNICESUMAR) mas já atuo na área antes mesmo de me formar.</div>
-                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>👋🏻️ My name is <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> and I am a <span className="font-PoppinsSemiBold text-white">fullstack developer</span> with 3 years of experience in the market. I have a degree in Software Engineering (UNICESUMAR) but i have been working in the area even before graduating.</div>
-                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>🧑🏻‍💻 Atualmente, trabalho com Power Platform e UI/UX Design, desenvolvendo aplicativos com <span className="font-PoppinsSemiBold text-white">PowerApps</span>, automações com <span className="font-PoppinsSemiBold text-white">Power Automate</span> e prototipagens com <span className="font-PoppinsSemiBold text-white">Figma</span>.</div>
-                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>🧑🏻‍💻 I currently work with Power Platform and UI/UX Design, developing applications with <span className="font-PoppinsSemiBold text-white">PowerApps</span>, automations with <span className="font-PoppinsSemiBold text-white">Power Automate</span> and prototyping with <span className="font-PoppinsSemiBold text-white">Figma</span>.</div>
-                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>📚 Tenho estudado <span className="font-PoppinsSemiBold text-white">Java Spring Boot</span> e <span className="font-PoppinsSemiBold text-white">React</span>, desenvolvendo projetos independentes como o <span className="font-PoppinsSemiBold text-white">BarberShop</span> e alguns freelances como <span className="font-PoppinsSemiBold text-white">Apontamento de Hora Extra</span>, por exemplo.</div>
-                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>📚 I have been studying <span className="font-PoppinsSemiBold text-white">Java Spring Boot</span> and <span className="font-PoppinsSemiBold text-white">React</span>, developing independent projects such as <span className="font-PoppinsSemiBold text-white">BarberShop</span> and some freelance work such as <span className="font-PoppinsSemiBold text-white">Extra hours report</span>, por example.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>👋🏻️ Meu nome é <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> e sou <span className="font-PoppinsSemiBold text-white">engenheiro de software</span>, com mais de 4 anos de experiência no mercado. Sou graduado em Engenharia de Software (UNICESUMAR) e já atuava na área antes mesmo de me formar.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>👋🏻️ My name is <span className="font-PoppinsSemiBold text-white">Eduardo Brancalhão</span> and I am a <span className="font-PoppinsSemiBold text-white">software engineer</span> with 4+ years of experience. I hold a Software Engineering degree (UNICESUMAR) and have been working in the field since before graduating.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>🧑🏻‍💻 Hoje atuo como <span className="font-PoppinsSemiBold text-white">engenheiro backend</span> em <span className="font-PoppinsSemiBold text-white">FinTech e crypto wallets</span>, construindo infraestrutura blockchain e a lógica de backend por trás de <span className="font-PoppinsSemiBold text-white">prediction markets</span>, com <span className="font-PoppinsSemiBold text-white">Node.js</span>, <span className="font-PoppinsSemiBold text-white">Prisma ORM</span> e <span className="font-PoppinsSemiBold text-white">PostgreSQL</span>. Como boa parte do meu trabalho vive onde finanças encontram confiabilidade, me preocupo profundamente com <span className="font-PoppinsSemiBold text-white">segurança e integridade de dados</span> em sistemas financeiros em produção.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>🧑🏻‍💻 Today I work as a <span className="font-PoppinsSemiBold text-white">backend engineer</span> in <span className="font-PoppinsSemiBold text-white">FinTech and crypto wallets</span>, building blockchain infrastructure and the backend logic behind <span className="font-PoppinsSemiBold text-white">prediction markets</span>, with <span className="font-PoppinsSemiBold text-white">Node.js</span>, <span className="font-PoppinsSemiBold text-white">Prisma ORM</span> and <span className="font-PoppinsSemiBold text-white">PostgreSQL</span>. Since much of my work lives where finance meets reliability, I care deeply about <span className="font-PoppinsSemiBold text-white">security and data integrity</span> in live financial systems.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "hidden" : "visible"}`}>🤖 Desenvolvo com uma abordagem <span className="font-PoppinsSemiBold text-white">AI-native e Spec-Driven Development</span>: primeiro defino regras, arquitetura e restrições, depois executo com <span className="font-PoppinsSemiBold text-white">workflows multi-agente</span> (Claude Code, agent loops, git worktrees) para acelerar a entrega e elevar a qualidade do design de sistemas. Também gerencio deploys em <span className="font-PoppinsSemiBold text-white">VPS Linux</span>, configuração de proxy e pipelines de <span className="font-PoppinsSemiBold text-white">CI/CD (GitHub Actions)</span> para serviços em produção.</div>
+                <div className={`text-[#94A3B8] leading-[30px] ${languageSelected === "en-US" ? "visible" : "hidden"}`}>🤖 I build with an <span className="font-PoppinsSemiBold text-white">AI-native, Spec-Driven Development</span> approach: defining rules, architecture and constraints first, then executing with <span className="font-PoppinsSemiBold text-white">multi-agent coding workflows</span> (Claude Code, agent loops, git worktrees) to accelerate delivery and raise system-design quality. I also manage <span className="font-PoppinsSemiBold text-white">Linux VPS</span> deployments, proxy configuration and <span className="font-PoppinsSemiBold text-white">CI/CD pipelines (GitHub Actions)</span> for production services.</div>
               </div>
               <div className='flex flex-col bg-[#20212280] backdrop-blur-[2px] rounded-[16px] px-[40px] py-[30px] gap-[20px] z-10'>
                 <p className='font-PoppinsBold text-white text-2xl sm:text-3xl'>{t('Principais destaques')}</p>
                 <div className='flex flex-col gap-1'>
-                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {t('Desenvolvimento de aplicações em low-code')}</div>
-                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Controle de eventos integrado ao outlook, visão de calendário e criação de eventos recorrentes; ')}<br />{t('Gestão e relatório de status de vendas, com dashboard interativo de produção de vendedores, gestão de metas e reportes semanais/mensais;')}</div>
+                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {languageSelected === "en-US" ? "Crypto wallets & blockchain infrastructure" : "Crypto wallets & infraestrutura blockchain"}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{languageSelected === "en-US" ? "Backend systems for cryptocurrency wallets and on-chain infrastructure, both for in-house products and as development services for other crypto-wallet companies." : "Sistemas de backend para carteiras de criptomoedas e infraestrutura on-chain, tanto para produtos próprios quanto como serviço de desenvolvimento para outras empresas de crypto wallets."}</div>
                 </div>
                 <div className='flex flex-col gap-1'>
-                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {t('Automação de processos empresariais')}</div>
-                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Bancos: redução de mais de 70% do tempo gasto em tarefas diárias;')} <br />{t('IPTU: automação completa do processo de emissão;')}</div>
+                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {languageSelected === "en-US" ? "Prediction markets & external integrations" : "Prediction markets & integrações externas"}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{languageSelected === "en-US" ? "Designing and building the backend logic behind prediction markets, including Polymarket integration (CLOB order-book, on-chain settlement, market import and auto-resolution)." : "Projeto e construção da lógica de backend por trás de prediction markets, incluindo integração com a Polymarket (CLOB, settlement on-chain, import e auto-resolução de mercados)."}</div>
                 </div>
                 <div className='flex flex-col gap-1'>
-                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {t('Prototipagem e UI/UX')}</div>
-                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{t('Criando e refatorando interfaces para melhorar a experiência do cliente.')}</div>
+                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {languageSelected === "en-US" ? "Security & data integrity" : "Segurança & integridade de dados"}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{languageSelected === "en-US" ? "Security reviews, fixing authentication/authorization vulnerabilities and remediating data-integrity issues in live financial systems." : "Revisões de segurança, correção de vulnerabilidades de autenticação/autorização e remediação de problemas de integridade de dados em sistemas financeiros em produção."}</div>
+                </div>
+                <div className='flex flex-col gap-1'>
+                  <div className='font-PoppinsSemiBold text-[#2D5CFF] text-lg leading-[30px]'>• {languageSelected === "en-US" ? "AI-native, Spec-Driven Development" : "Desenvolvimento AI-native (Spec-Driven)"}</div>
+                  <div className='text-[#94A3B8] leading-[30px] text-sm ml-5'>{languageSelected === "en-US" ? "Rules, architecture and constraints first, then execution with multi-agent coding workflows (Claude Code, agent loops, git worktrees) to accelerate delivery and system-design quality." : "Regras, arquitetura e restrições primeiro; depois execução com workflows multi-agente (Claude Code, agent loops, git worktrees) para acelerar a entrega e a qualidade do design de sistemas."}</div>
                 </div>
               </div>
               <BgDottedCircle className="right-[-50px] bottom-[-30px] md:h-[200px] md:w-[200px]" degrees={315} />
@@ -692,7 +701,7 @@ function App() {
             <div className='h-[1px] w-full bg-[#202122]'></div>
             <div className='flex w-full sm:justify-start justify-center'>
               <p className='text-[#707070] sm:w-[-webkit-fill-available] text-sm'>{t('Desenvolvido por')} <span className='text-[#2D5CFF]'>Dudu</span>.</p>
-              <p className='text-[#707070] sm:flex hidden min-w-fit text-sm'>© 2025 dudu-portfolio.com</p>
+              <p className='text-[#707070] sm:flex hidden min-w-fit text-sm'>© dudu-portfolio.com</p>
             </div>
             <svg className='absolute top-0 max-h-[212px] -z-10' viewBox="0 0 1402 212" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0L701 0L1402 0V212H0L0 0Z" fill="url(#paint0_radial_371_602)" fillOpacity="0.1" /><defs><radialGradient id="paint0_radial_371_602" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(701 -5.05447e-05) rotate(90) scale(212 701)"><stop stopColor="#2D5CFF" stopOpacity="0.65" /><stop offset="0.6" stopColor="#2D3190" stopOpacity="0.4" /><stop offset="1" stopColor="#2D3190" stopOpacity="0" /></radialGradient></defs></svg>
           </div>
