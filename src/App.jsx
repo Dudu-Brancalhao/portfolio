@@ -12,7 +12,6 @@ import parlakLandingPage from './midia/parlak/parlak_landing_page.png';
 import b2b_thumb from './midia/b2b_thumb.png';
 import hub4you_thumb from './midia/hub4you_thumb.png';
 import parlak_thumb from './midia/parlak_thumb.png';
-import intellij_logo from './midia/intellij_logo.png';
 import postman_logo from './midia/postman_logo.png';
 import dudu_portrait from './midia/Dudu_portrait_2.png';
 import BgDottedCircle from './dotted-circle.jsx';

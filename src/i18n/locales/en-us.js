@@ -1,4 +1,4 @@
-export default {
+const enUsTranslations = {
     translations: {
         'Olá 👋🏻, eu sou': 'Hello 👋🏻, I am',
         'Engenheiro de Software': 'Software Engineer',
@@ -57,4 +57,6 @@ export default {
         'Hero Section Impactante, Apresentação de Serviços, Showcases de Produtos, Seção de Credibilidade, Múltiplos CTAs, Design System Consistente.' : 'Impactful Hero Section, Services Presentation, Product Showcases, Credibility Section, Multiple CTAs, Consistent Design System.',
         'Atuei como UI/UX Designer responsável por todo o design da landing page no Figma. Desenvolvi o conceito visual completo, incluindo a escolha da paleta de cores dark com acentos em azul e verde, criação e seleção de ilustrações 3D isométricas. Garanti que o design fosse responsivo e otimizado para conversão, aplicando princípios de UX writing nas headlines e microtextos.' : 'I worked as the UI/UX Designer responsible for the entire landing page design in Figma. I developed the complete visual concept, including the selection of the dark color palette with blue and teal accents, creation and selection of isometric 3D illustrations. I ensured the design was responsive and optimized for conversion, applying UX writing principles to headlines and microcopy.',
     }
-}
+};
+
+export default enUsTranslations;

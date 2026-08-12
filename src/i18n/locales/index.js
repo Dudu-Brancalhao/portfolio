@@ -1,6 +1,8 @@
 import enUsTranslations from './en-us.js';
 
-export default {
+const resources = {
     'pt-BR': {},
     'en-US': enUsTranslations,
-}
+};
+
+export default resources;
