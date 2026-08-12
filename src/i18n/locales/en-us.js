@@ -1,7 +1,7 @@
 export default {
     translations: {
         'Olá 👋🏻, eu sou': 'Hello 👋🏻, I am',
-        'Desenvolvedor Fullstack': 'Fullstack Developer',
+        'Engenheiro de Software': 'Software Engineer',
         'Contato': 'Contact',
         'Início': 'Home',
         'Projetos': 'Projects',
