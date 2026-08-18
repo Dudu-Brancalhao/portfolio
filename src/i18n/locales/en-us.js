@@ -6,7 +6,7 @@ const enUsTranslations = {
         'Início': 'Home',
         'Projetos': 'Projects',
         'Sobre': 'About',
-        'Currículo': 'Curriculum',
+        'Currículo': 'Resume',
         'Conheça meu trabalho': 'Know my work',
         'APLICATIVO': 'APPLICATION',
         'Visualizar': 'Get in touch',
