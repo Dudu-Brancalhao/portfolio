@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import SplitType from 'split-type';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { cloneElement, useLayoutEffect, useState, useCallback, Fragment } from 'react';
+import { cloneElement, useLayoutEffect, useEffect, useRef, useState, useCallback, Fragment } from 'react';
 import logo from './logo.svg';
 import dudu_photo from './midia/profile-frame.png';
 import barbershop_thumb from './midia/barbershop_thumb.png';
@@ -76,6 +76,24 @@ function App() {
   const closeModal = () => {
     setSelectedProject(null);
   };
+
+  // Preload project videos into the browser cache once the Projects
+  // section scrolls into view, so opening the modal is an instant cache hit.
+  const projectsRef = useRef(null);
+  const [projectsVisible, setProjectsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = projectsRef.current;
+    if (!node || projectsVisible) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        setProjectsVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [projectsVisible]);
 
 
   useLayoutEffect(() => {
@@ -168,6 +186,30 @@ function App() {
   }, [languageSelected]);
 
   const projects = [
+    {
+      id: 5,
+      title: "Roleta de prêmios gamificada para feirão automotivo",
+      tags: ["Web App", "Backend", "Gamification"],
+      img: "/projects/gs-roulette-cover.jpg",
+      overview: "Aplicação web interativa criada para o feirão da GS Motors, onde clientes giram uma roleta para concorrer a prêmios reais. A experiência é totalmente imersiva, com trilha sonora, efeitos sonoros e animações, transformando o momento da venda em um evento memorável e gamificado.",
+      functionalities: "Roleta animada com sorteio baseado em dados reais de prêmios, trilha sonora e efeitos sonoros, controles de áudio, tela de resultado e experiência responsiva para totem/tablet.",
+      myFunction: "Atuei como engenheiro de software e backend do projeto, responsável por toda a lógica da aplicação. Desenvolvi o registro de inventário de prêmios e o gerenciamento das chances/probabilidades de sorteio, garantindo sorteios justos e baseados em dados reais. Toda a solução de backend foi construída sobre o Supabase (banco de dados, regras e persistência).",
+      stackTools:
+        <ul className="flex flex-row">
+          <TechIcon {...stackIcons.react} />
+          <TechIcon {...stackIcons.typescript} />
+          <TechIcon {...stackIcons.tailwind} />
+          <TechIcon {...stackIcons.supabase} />
+        </ul>,
+      gallery: [
+        {
+          type: "video",
+          src: "/projects/gs-roulette.mp4",
+          poster: "/projects/gs-roulette-cover.jpg",
+          alt: "Clique no ícone de som para ouvir a música 🔊",
+        },
+      ],
+    },
     {
       id: 1,
       title: "Aplicativo mobile para controle e gestão de barbearia",
@@ -402,13 +444,19 @@ function App() {
         </div>
 
         <div className='body max-w-[88rem] mx-auto flex flex-col md:flex-row items-center pt-[3rem] md:pt-[8rem] pb-[3rem] md:pb-[8rem] md:gap-12 gap-[10px] z-10 px-6'>
-          <div className='relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[3rem] w-full h-auto'>
+          <div ref={projectsRef} className='relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[3rem] w-full h-auto'>
             <BgDottedCircle className="top-[-8%] left-[-6%] md:h-[200px] md:w-[200px]" degrees={135} />
+            {projectsVisible && projects
+              .map((p) => p.gallery?.find((g) => g.type === "video"))
+              .filter(Boolean)
+              .map((v, i) => (
+                <video key={i} src={v.src} preload="auto" muted playsInline aria-hidden="true" style={{ display: "none" }} />
+              ))}
             {projects?.map((projectItem, index) => {
               return (
                 <div key={index} className="flex flex-col gap-[1rem]" onClick={() => openModal(projectItem)}>
                   <div className="w-full aspect-square bg-[#181C20] rounded-[16px] border-[1px] border-[#ffffff0D] hover:border-[#2D5CFF] shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] hover:shadow-[0_0px_60px_0_rgba(45,92,255,0.5)] duration-300 ease-in-out hover:scale-105 cursor-pointer">
-                    <img src={projectItem.img} alt={projectItem.img} className='rounded-[16px] md:h-[-webkit-fill-available] object-contain' />
+                    <img src={projectItem.img} alt={projectItem.img} className={`rounded-[16px] ${projectItem.gallery?.some((g) => g.type === "video") ? 'w-full h-full object-cover' : 'md:h-[-webkit-fill-available] object-contain'}`} />
                   </div>
                   <div className="flex flex-row gap-[10px]">
                     {projectItem.tags?.map((tag, index) => {
@@ -663,11 +711,25 @@ function App() {
             }
             gallery={
               selectedProject && (
-                <ul className="bg-[#1C1E22] flex flex-wrap gap-[40px] justify-center max-h-100vh overflow-auto custom-scrollbar p-8">
+                <ul className={`bg-[#1C1E22] custom-scrollbar ${selectedProject.gallery.some((g) => g.type === "video") ? "flex flex-col items-center justify-center gap-6 min-h-screen lg:h-full p-8" : "flex flex-wrap gap-[40px] justify-center max-h-100vh overflow-auto p-8"}`}>
                   {selectedProject.gallery.map((projectItem, index) => (
-                    <li className="flex flex-col items-center gap-4">
-                      <img className={`${projectItem.device === "mobile" ? "w-[320px]" : "w-full"} rounded-lg`} src={projectItem.image} alt={`${projectItem.alt} showcase`} />
-                      <p className="text-white">{projectItem.alt}</p>
+                    <li key={index} className={`flex flex-col items-center gap-4 ${projectItem.type === "video" ? "w-full" : ""}`}>
+                      {projectItem.type === "video" ? (
+                        <video
+                          src={projectItem.src}
+                          poster={projectItem.poster}
+                          muted
+                          autoPlay
+                          loop
+                          controls
+                          playsInline
+                          preload="auto"
+                          className="w-full max-w-[1200px] max-h-[80vh] rounded-lg"
+                        />
+                      ) : (
+                        <img className={`${projectItem.device === "mobile" ? "w-[320px]" : "w-full"} rounded-lg`} src={projectItem.image} alt={`${projectItem.alt} showcase`} />
+                      )}
+                      <p className="text-white">{t(projectItem.alt)}</p>
                     </li>
                   ))}
                 </ul>
